@@ -1,0 +1,1149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Feb 2026 — Performance Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Serif:wght@600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.2.0/chartjs-plugin-datalabels.min.js"></script>
+<style>
+  /* Password Gate */
+  #password-gate {
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+    background: #0a0e1a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'IBM Plex Sans', sans-serif;
+  }
+  #password-gate.hidden { display: none; }
+  .gate-box {
+    background: #111827;
+    border: 1px solid #1e293b;
+    border-radius: 24px;
+    padding: 48px;
+    width: 420px;
+    max-width: 90vw;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .gate-box::before {
+    content: '';
+    position: absolute;
+    top: -80px; right: -80px;
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(99,102,241,0.15), transparent);
+    filter: blur(50px);
+  }
+  .gate-logo {
+    font-family: 'IBM Plex Serif', serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #e2e8f0, #6366f1, #06b6d4);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 8px;
+  }
+  .gate-sub {
+    font-size: 0.78rem;
+    color: #64748b;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 32px;
+  }
+  .gate-icon {
+    font-size: 2.4rem;
+    margin-bottom: 20px;
+  }
+  .gate-input {
+    width: 100%;
+    padding: 14px 20px;
+    background: #1a2235;
+    border: 1px solid #334155;
+    border-radius: 12px;
+    color: #e2e8f0;
+    font-size: 1rem;
+    font-family: 'IBM Plex Sans', sans-serif;
+    outline: none;
+    transition: border-color 0.2s;
+    text-align: center;
+    letter-spacing: 3px;
+  }
+  .gate-input:focus { border-color: #6366f1; }
+  .gate-input::placeholder { letter-spacing: 1px; color: #475569; }
+  .gate-btn {
+    width: 100%;
+    padding: 14px;
+    margin-top: 16px;
+    background: linear-gradient(135deg, #6366f1, #4f46e5);
+    border: none;
+    border-radius: 12px;
+    color: #fff;
+    font-size: 0.9rem;
+    font-weight: 600;
+    font-family: 'IBM Plex Sans', sans-serif;
+    cursor: pointer;
+    letter-spacing: 1px;
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+  .gate-btn:hover { transform: translateY(-1px); box-shadow: 0 8px 24px rgba(99,102,241,0.3); }
+  .gate-error {
+    color: #f43f5e;
+    font-size: 0.82rem;
+    margin-top: 12px;
+    min-height: 20px;
+  }
+  #dashboard-content { display: none; }
+  #dashboard-content.visible { display: block; }
+</style>
+
+<style>
+  :root {
+    --bg: #0a0e1a;
+    --surface: #111827;
+    --surface2: #1a2235;
+    --border: #1e293b;
+    --text: #e2e8f0;
+    --text-dim: #94a3b8;
+    --accent: #6366f1;
+    --accent2: #818cf8;
+    --green: #10b981;
+    --green-dim: rgba(16,185,129,0.15);
+    --amber: #f59e0b;
+    --amber-dim: rgba(245,158,11,0.12);
+    --rose: #f43f5e;
+    --cyan: #06b6d4;
+    --cyan-dim: rgba(6,182,212,0.12);
+    --purple: #a78bfa;
+    --purple-dim: rgba(167,139,250,0.12);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'IBM Plex Sans', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+  /* Noise texture overlay */
+  body::before {
+    content:'';
+    position:fixed; inset:0;
+    background: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events:none; z-index:9999; opacity:0.4;
+  }
+
+  .header {
+    padding: 40px 48px 20px;
+    display:flex; justify-content:space-between; align-items:flex-end;
+    border-bottom: 1px solid var(--border);
+  }
+  .header h1 {
+    font-family: 'IBM Plex Serif', serif;
+    font-size: 2.6rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #e2e8f0, #6366f1, #06b6d4);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: -1px;
+  }
+  .header .subtitle {
+    font-size: 0.85rem;
+    color: var(--text-dim);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+  }
+  .header .date-badge {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    padding: 8px 20px;
+    border-radius: 100px;
+    font-size: 0.82rem;
+    color: var(--accent2);
+    letter-spacing: 1px;
+  }
+
+  .main { padding: 32px 48px 60px; }
+
+  /* Section Titles */
+  .section-title {
+    font-family: 'IBM Plex Serif', serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin-bottom: 24px;
+    display:flex; align-items:center; gap:14px;
+  }
+  .section-title .dot {
+    width:10px; height:10px; border-radius:50%;
+    display:inline-block;
+  }
+  .section-title .line {
+    flex:1; height:1px;
+    background: linear-gradient(90deg, var(--border), transparent);
+  }
+
+  /* KPI Cards */
+  .kpi-row {
+    display:grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+  .kpi-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 24px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.25s, box-shadow 0.25s;
+  }
+  .kpi-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+  }
+  .kpi-card .glow {
+    position:absolute; top:-30px; right:-30px;
+    width:100px; height:100px; border-radius:50%;
+    filter:blur(40px); opacity:0.25;
+  }
+  .kpi-card .label {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--text-dim);
+    margin-bottom: 8px;
+  }
+  .kpi-card .value {
+    font-family: 'IBM Plex Serif', serif;
+    font-size: 1.9rem;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+  }
+  .kpi-card .sub {
+    font-size: 0.78rem;
+    color: var(--text-dim);
+    margin-top: 6px;
+  }
+
+  /* Charts */
+  .chart-container {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 28px;
+    margin-bottom: 32px;
+    position:relative;
+  }
+  .chart-container h3 {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--text-dim);
+    margin-bottom: 20px;
+  }
+  .chart-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 32px;
+  }
+
+  /* Company Tables */
+  .table-wrap {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 28px;
+    margin-bottom: 32px;
+    overflow-x:auto;
+  }
+  .table-wrap h3 {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--text-dim);
+    margin-bottom: 18px;
+  }
+  table {
+    width:100%; border-collapse:collapse;
+  }
+  table thead th {
+    text-align:left;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--text-dim);
+    padding: 10px 16px;
+    border-bottom: 1px solid var(--border);
+  }
+  table tbody td {
+    padding: 12px 16px;
+    font-size: 0.88rem;
+    border-bottom: 1px solid rgba(30,41,59,0.5);
+    color: var(--text);
+  }
+  table tbody tr:hover { background: rgba(99,102,241,0.04); }
+  table tbody tr:last-child td { border-bottom:none; }
+  .company-name {
+    font-weight: 600;
+    display:flex; align-items:center; gap:10px;
+  }
+  .company-dot {
+    width:8px; height:8px; border-radius:50%;
+  }
+  .bar-cell {
+    position:relative;
+  }
+  .bar-bg {
+    position:absolute; left:0; top:50%; transform:translateY(-50%);
+    height:28px; border-radius:6px; opacity:0.15;
+  }
+  .bar-val {
+    position:relative; z-index:1;
+  }
+  .roi-badge {
+    display:inline-block;
+    padding:3px 10px;
+    border-radius:100px;
+    font-size:0.78rem;
+    font-weight:600;
+  }
+
+  /* Footer */
+  .footer {
+    text-align:center;
+    padding:20px;
+    color: var(--text-dim);
+    font-size:0.72rem;
+    letter-spacing:1px;
+    opacity:0.5;
+  }
+
+  /* Animations */
+  @keyframes fadeUp {
+    from { opacity:0; transform:translateY(20px); }
+    to { opacity:1; transform:translateY(0); }
+  }
+  .animate {
+    animation: fadeUp 0.6s ease forwards;
+    opacity:0;
+  }
+  .d1 { animation-delay: 0.05s; }
+  .d2 { animation-delay: 0.1s; }
+  .d3 { animation-delay: 0.15s; }
+  .d4 { animation-delay: 0.2s; }
+  .d5 { animation-delay: 0.25s; }
+  .d6 { animation-delay: 0.3s; }
+
+  @media (max-width: 900px) {
+    .header { padding: 24px; flex-direction:column; align-items:flex-start; gap:12px; }
+    .main { padding: 20px; }
+    .chart-row { grid-template-columns: 1fr; }
+    .kpi-row { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+</head>
+<body>
+
+<!-- PASSWORD GATE -->
+<div id="password-gate">
+  <div class="gate-box">
+    <div class="gate-icon">🔒</div>
+    <div class="gate-logo">February 2026</div>
+    <div class="gate-sub">Performance Dashboard</div>
+    <input type="password" id="gate-password" class="gate-input" placeholder="Enter password" autofocus onkeydown="if(event.key==='Enter')checkPassword()">
+    <button class="gate-btn" onclick="checkPassword()">UNLOCK DASHBOARD</button>
+    <div class="gate-error" id="gate-error"></div>
+  </div>
+</div>
+
+<div id="dashboard-content">
+
+<div class="header">
+  <div>
+    <div class="subtitle">Month-End Performance Report</div>
+    <h1>February 2026</h1>
+  </div>
+  <div class="date-badge">01 Feb – 28 Feb 2026 · Month Closed</div>
+</div>
+
+<div class="main">
+
+  <!-- ═══════════ SECTION 1: DAILY OVERVIEW ═══════════ -->
+  <div class="section-title animate d1">
+    <span class="dot" style="background:var(--accent)"></span>
+    Daily Performance Overview
+    <span class="line"></span>
+  </div>
+
+  <div class="kpi-row">
+    <div class="kpi-card animate d1">
+      <div class="glow" style="background:var(--green)"></div>
+      <div class="label">Total Spend</div>
+      <div class="value" style="color:var(--text)">$20,139</div>
+      <div class="sub">28 days · Full month</div>
+    </div>
+    <div class="kpi-card animate d2">
+      <div class="glow" style="background:var(--cyan)"></div>
+      <div class="label">Total Revenue</div>
+      <div class="value" style="color:var(--cyan)">$293,072</div>
+      <div class="sub">Avg $10,467/day</div>
+    </div>
+    <div class="kpi-card animate d3">
+      <div class="glow" style="background:var(--green)"></div>
+      <div class="label">Total Profit</div>
+      <div class="value" style="color:var(--green)">$272,934</div>
+      <div class="sub">Avg $9,748/day</div>
+    </div>
+    <div class="kpi-card animate d4">
+      <div class="glow" style="background:var(--purple)"></div>
+      <div class="label">Overall ROI</div>
+      <div class="value" style="color:var(--purple)">1,355%</div>
+      <div class="sub">Return on investment</div>
+    </div>
+  </div>
+
+  <!-- Multi-metric chart -->
+  <div class="chart-container animate d3">
+    <h3>Daily Profit & Revenue Trend</h3>
+    <canvas id="dailyChart" height="180"></canvas>
+  </div>
+
+  <div class="chart-row">
+    <div class="chart-container animate d4">
+      <h3>Daily Spend</h3>
+      <canvas id="spendChart" height="130"></canvas>
+    </div>
+    <div class="chart-container animate d5">
+      <h3>Daily ROI %</h3>
+      <canvas id="roiChart" height="130"></canvas>
+    </div>
+  </div>
+
+  <!-- ═══════════ SECTION 2: MONTHLY DASHBOARD ═══════════ -->
+  <div class="section-title animate d1" style="margin-top:16px;">
+    <span class="dot" style="background:var(--cyan)"></span>
+    Monthly Dashboard — By Company
+    <span class="line"></span>
+  </div>
+
+  <div class="kpi-row">
+    <div class="kpi-card animate d1">
+      <div class="glow" style="background:var(--amber)"></div>
+      <div class="label">Final Monthly Profit</div>
+      <div class="value" style="color:var(--amber)">$272,934</div>
+      <div class="sub">February 2026 closed</div>
+    </div>
+    <div class="kpi-card animate d2">
+      <div class="glow" style="background:var(--green)"></div>
+      <div class="label">Companies in Profit</div>
+      <div class="value" style="color:var(--green)">5</div>
+      <div class="sub">of 5 total companies</div>
+    </div>
+    <div class="kpi-card animate d3">
+      <div class="glow" style="background:var(--purple)"></div>
+      <div class="label">Monthly ROI</div>
+      <div class="value" style="color:var(--purple)">1,355%</div>
+      <div class="sub">Grand total ROI</div>
+    </div>
+    <div class="kpi-card animate d4">
+      <div class="glow" style="background:var(--cyan)"></div>
+      <div class="label">Total Profit (Final)</div>
+      <div class="value" style="color:var(--cyan)">$272,934</div>
+      <div class="sub">Month to date</div>
+    </div>
+  </div>
+
+  <div class="chart-row">
+    <div class="chart-container animate d4">
+      <h3>Company Profit Breakdown</h3>
+      <canvas id="monthlyProfitChart" height="160"></canvas>
+    </div>
+    <div class="chart-container animate d5">
+      <h3>Company ROI Comparison</h3>
+      <canvas id="monthlyRoiChart" height="160"></canvas>
+    </div>
+  </div>
+
+  <div class="table-wrap animate d5">
+    <h3>Monthly Company Performance</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Company</th>
+          <th>Spend</th>
+          <th>Revenue</th>
+          <th>Profit</th>
+          <th>ROI %</th>
+          <th>Run Rate</th>
+        </tr>
+      </thead>
+      <tbody id="monthlyTable"></tbody>
+    </table>
+  </div>
+
+  <!-- ═══════════ SECTION 3: YESTERDAY DASHBOARD ═══════════ -->
+  <div class="section-title animate d1" style="margin-top:16px;">
+    <span class="dot" style="background:var(--rose)"></span>
+    Yesterday's Performance — By Company
+    <span class="line"></span>
+  </div>
+
+  <div class="kpi-row">
+    <div class="kpi-card animate d1">
+      <div class="glow" style="background:var(--green)"></div>
+      <div class="label">Yesterday Profit</div>
+      <div class="value" style="color:var(--green)">$7,970</div>
+      <div class="sub">Feb 28, 2026</div>
+    </div>
+    <div class="kpi-card animate d2">
+      <div class="glow" style="background:var(--purple)"></div>
+      <div class="label">Yesterday ROI</div>
+      <div class="value" style="color:var(--purple)">1,066%</div>
+      <div class="sub">Return on $748 spend</div>
+    </div>
+    <div class="kpi-card animate d3">
+      <div class="glow" style="background:var(--cyan)"></div>
+      <div class="label">Active Companies</div>
+      <div class="value" style="color:var(--cyan)">4</div>
+      <div class="sub">Generating revenue</div>
+    </div>
+
+  </div>
+
+  <div class="chart-row">
+    <div class="chart-container animate d4">
+      <h3>Yesterday — Company Profit</h3>
+      <canvas id="yesterdayProfitChart" height="160"></canvas>
+    </div>
+    <div class="chart-container animate d5">
+      <h3>Yesterday — Company ROI</h3>
+      <canvas id="yesterdayRoiChart" height="160"></canvas>
+    </div>
+  </div>
+
+  <div class="table-wrap animate d6">
+    <h3>Yesterday Company Breakdown</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Company</th>
+          <th>Spend</th>
+          <th>Revenue</th>
+          <th>Profit</th>
+          <th>ROI %</th>
+        </tr>
+      </thead>
+      <tbody id="yesterdayTable"></tbody>
+    </table>
+  </div>
+
+</div>
+
+<div class="footer">DASHBOARD GENERATED · FEB 2026 · ALL FIGURES IN USD</div>
+
+<!-- ═══════════ EXECUTIVE SUMMARY ═══════════ -->
+<div style="padding:0 48px 60px;">
+  <div class="section-title animate d1">
+    <span class="dot" style="background:linear-gradient(135deg,var(--accent),var(--cyan))"></span>
+    February 2026 — Executive Summary
+    <span class="line"></span>
+  </div>
+
+  <!-- Summary Hero -->
+  <div style="background:linear-gradient(135deg,#111827 0%,#1a1a3e 50%,#111827 100%);border:1px solid var(--border);border-radius:24px;padding:48px;margin-bottom:28px;position:relative;overflow:hidden;">
+    <div style="position:absolute;top:-60px;right:-60px;width:250px;height:250px;border-radius:50%;background:radial-gradient(circle,rgba(99,102,241,0.12),transparent);filter:blur(40px);"></div>
+    <div style="position:absolute;bottom:-40px;left:-40px;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,rgba(6,182,212,0.1),transparent);filter:blur(40px);"></div>
+    
+    <div style="text-align:center;position:relative;z-index:1;">
+      <div style="font-size:0.7rem;text-transform:uppercase;letter-spacing:3px;color:var(--text-dim);margin-bottom:12px;">Month-End Closing Report</div>
+      <div style="font-family:'IBM Plex Serif',serif;font-size:3.2rem;font-weight:700;background:linear-gradient(135deg,#10b981,#06b6d4);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:6px;">$272,934</div>
+      <div style="font-size:1rem;color:var(--text-dim);margin-bottom:32px;">Total Net Profit · February 2026</div>
+      
+      <div style="display:flex;justify-content:center;gap:48px;flex-wrap:wrap;">
+        <div style="text-align:center;">
+          <div style="font-size:1.8rem;font-weight:700;color:var(--text);">$293,072</div>
+          <div style="font-size:0.7rem;text-transform:uppercase;letter-spacing:1.5px;color:var(--text-dim);margin-top:4px;">Total Revenue</div>
+        </div>
+        <div style="text-align:center;">
+          <div style="font-size:1.8rem;font-weight:700;color:var(--text);">$20,139</div>
+          <div style="font-size:0.7rem;text-transform:uppercase;letter-spacing:1.5px;color:var(--text-dim);margin-top:4px;">Total Spend</div>
+        </div>
+        <div style="text-align:center;">
+          <div style="font-size:1.8rem;font-weight:700;color:var(--purple);">1,355%</div>
+          <div style="font-size:0.7rem;text-transform:uppercase;letter-spacing:1.5px;color:var(--text-dim);margin-top:4px;">Overall ROI</div>
+        </div>
+        <div style="text-align:center;">
+          <div style="font-size:1.8rem;font-weight:700;color:var(--green);">93.1%</div>
+          <div style="font-size:0.7rem;text-transform:uppercase;letter-spacing:1.5px;color:var(--text-dim);margin-top:4px;">Profit Margin</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Key Insights Grid -->
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:28px;">
+    
+    <!-- Top Performers -->
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:32px;">
+      <div style="font-size:0.7rem;text-transform:uppercase;letter-spacing:2px;color:var(--cyan);margin-bottom:20px;">🏆 Top Performers</div>
+      
+      <div style="margin-bottom:18px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+          <span style="font-weight:600;color:var(--text);">Spirion</span>
+          <span style="color:var(--cyan);font-weight:700;font-size:0.9rem;">$98,389 profit</span>
+        </div>
+        <div style="background:rgba(6,182,212,0.1);border-radius:8px;height:8px;overflow:hidden;">
+          <div style="width:100%;height:100%;background:var(--cyan);border-radius:8px;"></div>
+        </div>
+        <div style="font-size:0.75rem;color:var(--text-dim);margin-top:4px;">3,050% ROI · Highest efficiency across all companies</div>
+      </div>
+      
+      <div style="margin-bottom:18px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+          <span style="font-weight:600;color:var(--text);">Innovate</span>
+          <span style="color:var(--accent2);font-weight:700;font-size:0.9rem;">$108,460 profit</span>
+        </div>
+        <div style="background:rgba(99,102,241,0.1);border-radius:8px;height:8px;overflow:hidden;">
+          <div style="width:91%;height:100%;background:var(--accent);border-radius:8px;"></div>
+        </div>
+        <div style="font-size:0.75rem;color:var(--text-dim);margin-top:4px;">1,233% ROI · Largest absolute profit contributor</div>
+      </div>
+      
+      <div>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+          <span style="font-weight:600;color:var(--text);">Spread</span>
+          <span style="color:var(--green);font-weight:700;font-size:0.9rem;">$47,957 profit</span>
+        </div>
+        <div style="background:rgba(16,185,129,0.1);border-radius:8px;height:8px;overflow:hidden;">
+          <div style="width:49%;height:100%;background:var(--green);border-radius:8px;"></div>
+        </div>
+        <div style="font-size:0.75rem;color:var(--text-dim);margin-top:4px;">1,054% ROI · Consistent mid-tier performer</div>
+      </div>
+    </div>
+
+    <!-- Key Metrics & Insights -->
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:32px;">
+      <div style="font-size:0.7rem;text-transform:uppercase;letter-spacing:2px;color:var(--amber);margin-bottom:20px;">📊 Key Insights</div>
+      
+      <div style="margin-bottom:20px;padding-bottom:18px;border-bottom:1px solid var(--border);">
+        <div style="font-weight:600;color:var(--text);margin-bottom:6px;">Peak Performance Day</div>
+        <div style="font-size:0.85rem;color:var(--text-dim);">Feb 4 delivered the highest single-day profit of <span style="color:var(--green);font-weight:600;">$14,084</span> at an exceptional <span style="color:var(--purple);font-weight:600;">2,253% ROI</span>, driven by strong performance across all companies.</div>
+      </div>
+      
+      <div style="margin-bottom:20px;padding-bottom:18px;border-bottom:1px solid var(--border);">
+        <div style="font-weight:600;color:var(--text);margin-bottom:6px;">Profit Concentration</div>
+        <div style="font-size:0.85rem;color:var(--text-dim);">The top two companies — Innovate and Spirion — account for <span style="color:var(--cyan);font-weight:600;">75.7%</span> of total profit ($206,849 combined), highlighting strong revenue diversification potential.</div>
+      </div>
+      
+      <div style="margin-bottom:20px;padding-bottom:18px;border-bottom:1px solid var(--border);">
+        <div style="font-weight:600;color:var(--text);margin-bottom:6px;">Spend Efficiency</div>
+        <div style="font-size:0.85rem;color:var(--text-dim);">Every $1 spent generated <span style="color:var(--green);font-weight:600;">$14.55</span> in revenue and <span style="color:var(--green);font-weight:600;">$13.55</span> in profit. Average daily spend of $719 produced consistent returns throughout the month.</div>
+      </div>
+
+      <div>
+        <div style="font-weight:600;color:var(--text);margin-bottom:6px;">Weekly Trends</div>
+        <div style="font-size:0.85rem;color:var(--text-dim);">Week 1 averaged <span style="font-weight:600;color:var(--text);">$10,277</span>/day profit, Week 2 peaked at <span style="font-weight:600;color:var(--text);">$10,301</span>/day, then stabilized around <span style="font-weight:600;color:var(--text);">$9,340</span>/day in Weeks 3–4 — a healthy, sustainable pattern.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Recommendations -->
+  <div style="background:linear-gradient(135deg,rgba(99,102,241,0.06),rgba(6,182,212,0.06));border:1px solid var(--border);border-radius:20px;padding:36px;margin-bottom:28px;">
+    <div style="font-size:0.7rem;text-transform:uppercase;letter-spacing:2px;color:var(--green);margin-bottom:20px;">🎯 Strategic Recommendations for March 2026</div>
+    
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px;">
+      <div style="background:var(--surface);border-radius:14px;padding:24px;border:1px solid var(--border);">
+        <div style="font-size:1.6rem;margin-bottom:10px;">📈</div>
+        <div style="font-weight:600;color:var(--text);margin-bottom:8px;">Scale Spirion</div>
+        <div style="font-size:0.82rem;color:var(--text-dim);line-height:1.6;">At 3,050% ROI with only $3,225 monthly spend, Spirion has significant headroom. Consider gradually increasing budget to test scalability while maintaining efficiency.</div>
+      </div>
+      
+      <div style="background:var(--surface);border-radius:14px;padding:24px;border:1px solid var(--border);">
+        <div style="font-size:1.6rem;margin-bottom:10px;">🔍</div>
+        <div style="font-weight:600;color:var(--text);margin-bottom:8px;">Monitor IMPULSPROM</div>
+        <div style="font-size:0.82rem;color:var(--text-dim);line-height:1.6;">ROI declined to 289% with zero activity on the last day. Evaluate whether this channel remains viable or if budget should be reallocated to higher-performing companies.</div>
+      </div>
+      
+      <div style="background:var(--surface);border-radius:14px;padding:24px;border:1px solid var(--border);">
+        <div style="font-size:1.6rem;margin-bottom:10px;">⚖️</div>
+        <div style="font-weight:600;color:var(--text);margin-bottom:8px;">Diversify Revenue</div>
+        <div style="font-size:0.82rem;color:var(--text-dim);line-height:1.6;">With 75.7% of profits from two companies, explore activating dormant partners or onboarding new ones to reduce concentration risk and unlock additional growth.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Final Statement -->
+  <div style="text-align:center;padding:32px 0;">
+    <div style="font-family:'IBM Plex Serif',serif;font-size:1.1rem;color:var(--text-dim);font-style:italic;max-width:700px;margin:0 auto;line-height:1.8;">
+      "February 2026 closed with <span style="color:var(--green);font-weight:600;">$272,934 in net profit</span> on just $20,139 in spend — a <span style="color:var(--purple);font-weight:600;">1,355% return on investment</span>. All five active companies remained profitable throughout the month, demonstrating strong operational execution and media buying discipline."
+    </div>
+  </div>
+</div>
+
+</div> <!-- end dashboard-content -->
+
+<script>
+// ─── PASSWORD GATE ───
+// Change this password to whatever you want
+const DASHBOARD_PASSWORD = 'south2026';
+
+function checkPassword() {
+  const input = document.getElementById('gate-password');
+  const error = document.getElementById('gate-error');
+  
+  if (input.value === DASHBOARD_PASSWORD) {
+    document.getElementById('password-gate').classList.add('hidden');
+    document.getElementById('dashboard-content').classList.add('visible');
+    sessionStorage.setItem('dashboard_unlocked', 'true');
+  } else {
+    error.textContent = 'Incorrect password. Please try again.';
+    input.value = '';
+    input.style.borderColor = '#f43f5e';
+    setTimeout(() => { input.style.borderColor = '#334155'; }, 1500);
+  }
+}
+
+// Keep unlocked during same browser session
+if (sessionStorage.getItem('dashboard_unlocked') === 'true') {
+  document.getElementById('password-gate').classList.add('hidden');
+  document.getElementById('dashboard-content').classList.add('visible');
+}
+</script>
+
+<script>
+// ─── DATA ───
+const dailyData = [
+  {date:'Feb 01',spend:798,revenue:10957,profit:10159,roi:1272.75},
+  {date:'Feb 02',spend:713,revenue:10851,profit:10137,roi:1421.03},
+  {date:'Feb 03',spend:662,revenue:13356,profit:12694,roi:1917.51},
+  {date:'Feb 04',spend:625,revenue:14709,profit:14084,roi:2253},
+  {date:'Feb 05',spend:640,revenue:9204,profit:8564,roi:1338},
+  {date:'Feb 06',spend:622,revenue:8633,profit:8011,roi:1288},
+  {date:'Feb 07',spend:711,revenue:9014,profit:8303,roi:1169},
+  {date:'Feb 08',spend:816,revenue:7182,profit:6366,roi:780},
+  {date:'Feb 09',spend:722,revenue:9644,profit:8922,roi:1235},
+  {date:'Feb 10',spend:628,revenue:10265,profit:9636,roi:1533},
+  {date:'Feb 11',spend:607,revenue:9720,profit:9113,roi:1502},
+  {date:'Feb 12',spend:613,revenue:11732,profit:11119,roi:1814},
+  {date:'Feb 13',spend:580,revenue:12251,profit:11671,roi:2012},
+  {date:'Feb 14',spend:599,revenue:11789,profit:11190,roi:1869},
+  {date:'Feb 15',spend:727,revenue:10080,profit:9354,roi:1287},
+  {date:'Feb 16',spend:733,revenue:10105,profit:9372,roi:1278},
+  {date:'Feb 17',spend:759,revenue:10117,profit:9358,roi:1232},
+  {date:'Feb 18',spend:661,revenue:9931,profit:9270,roi:1403},
+  {date:'Feb 19',spend:623,revenue:10441,profit:9818,roi:1577},
+  {date:'Feb 20',spend:676,revenue:9534,profit:8857,roi:1309},
+  {date:'Feb 21',spend:763,revenue:9908,profit:9145,roi:1199},
+  {date:'Feb 22',spend:950,revenue:10671,profit:9720,roi:1023},
+  {date:'Feb 23',spend:891,revenue:10096,profit:9205,roi:1033.61},
+  {date:'Feb 24',spend:851,revenue:12156,profit:11305,roi:1328.11},
+  {date:'Feb 25',spend:858,revenue:11293,profit:10435,roi:1216},
+  {date:'Feb 26',spend:816,revenue:10018,profit:9201,roi:1127},
+  {date:'Feb 27',spend:746,revenue:10700,profit:9953,roi:1333},
+  {date:'Feb 28',spend:748,revenue:8718,profit:7970,roi:1066},
+];
+
+const monthlyCompanies = [
+  {name:'Innovate',spend:8797,revenue:117257,profit:108460,roi:1232.77,runRate:108460,color:'#6366f1'},
+  {name:'Spirion',spend:3225,revenue:101613,profit:98389,roi:3050.17,runRate:98389,color:'#06b6d4'},
+  {name:'Spread',spend:4549,revenue:52506,profit:47957,roi:1053.97,runRate:47957,color:'#10b981'},
+  {name:'Galatea',spend:2930,revenue:19213,profit:16283,roi:555.49,runRate:16283,color:'#f59e0b'},
+  {name:'IMPULSPROM',spend:638,revenue:2483,profit:1845,roi:288.94,runRate:1845,color:'#f43f5e'},
+];
+
+const yesterdayCompanies = [
+  {name:'Spirion',spend:147,revenue:3444,profit:3297,roi:2243.83,color:'#06b6d4'},
+  {name:'Innovate',spend:348,revenue:2784,profit:2435,roi:698.87,color:'#6366f1'},
+  {name:'Spread',spend:168,revenue:1900,profit:1732,roi:1032.71,color:'#10b981'},
+  {name:'Galatea',spend:85,revenue:590,profit:505,roi:597.78,color:'#f59e0b'},
+  {name:'IMPULSPROM',spend:0,revenue:0,profit:0,roi:0,color:'#f43f5e'},
+];
+
+// ─── CHART DEFAULTS ───
+Chart.register(ChartDataLabels);
+Chart.defaults.color = '#94a3b8';
+Chart.defaults.borderColor = 'rgba(30,41,59,0.6)';
+Chart.defaults.font.family = "'IBM Plex Sans', sans-serif";
+Chart.defaults.plugins.datalabels = { display: false };
+
+function gradient(ctx, c1, c2) {
+  const g = ctx.createLinearGradient(0, 0, 0, 400);
+  g.addColorStop(0, c1);
+  g.addColorStop(1, c2);
+  return g;
+}
+
+// ─── DAILY PROFIT & REVENUE ───
+const ctx1 = document.getElementById('dailyChart').getContext('2d');
+new Chart(ctx1, {
+  type: 'line',
+  data: {
+    labels: dailyData.map(d => d.date),
+    datasets: [
+      {
+        label: 'Profit',
+        data: dailyData.map(d => d.profit),
+        borderColor: '#10b981',
+        backgroundColor: gradient(ctx1, 'rgba(16,185,129,0.18)', 'rgba(16,185,129,0)'),
+        fill: true,
+        tension: 0.4,
+        borderWidth: 3,
+        pointRadius: 6,
+        pointBackgroundColor: '#10b981',
+        pointBorderColor: '#0a0e1a',
+        pointBorderWidth: 3,
+        yAxisID: 'y',
+        datalabels: {
+          display: (ctx) => ctx.dataIndex % 2 === 0,
+          align: 'top',
+          anchor: 'end',
+          offset: 10,
+          color: '#10b981',
+          font: { weight: 'bold', size: 12 },
+          formatter: v => '$' + (v/1000).toFixed(1) + 'k',
+        }
+      },
+      {
+        label: 'ROI %',
+        data: dailyData.map(d => d.roi),
+        borderColor: '#a78bfa',
+        backgroundColor: 'transparent',
+        borderWidth: 2.5,
+        borderDash: [4,4],
+        tension: 0.4,
+        pointRadius: 5,
+        pointBackgroundColor: '#a78bfa',
+        pointBorderColor: '#0a0e1a',
+        pointBorderWidth: 3,
+        yAxisID: 'y1',
+        datalabels: {
+          display: (ctx) => ctx.dataIndex % 2 === 1,
+          align: 'bottom',
+          anchor: 'start',
+          offset: 10,
+          color: '#a78bfa',
+          font: { weight: 'bold', size: 11 },
+          formatter: v => v.toFixed(0) + '%',
+          backgroundColor: 'rgba(167,139,250,0.15)',
+          borderRadius: 4,
+          padding: {top:3,bottom:3,left:5,right:5},
+        }
+      },
+      {
+        label: 'Spend',
+        data: dailyData.map(d => d.spend),
+        borderColor: '#f43f5e',
+        backgroundColor: 'transparent',
+        borderWidth: 1.5,
+        borderDash: [5,5],
+        tension: 0.4,
+        pointRadius: 4,
+        pointBackgroundColor: '#f43f5e',
+        pointBorderColor: '#0a0e1a',
+        pointBorderWidth: 2,
+        yAxisID: 'y',
+        datalabels: {
+          display: (ctx) => ctx.dataIndex % 2 === 0,
+          align: 'bottom',
+          anchor: 'end',
+          offset: 6,
+          color: '#f43f5e',
+          font: { weight: 'bold', size: 9.5 },
+          formatter: v => '$' + v,
+        }
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    layout: { padding: { top: 40, bottom: 30 } },
+    plugins: {
+      legend: { position: 'top', labels: { usePointStyle: true, padding: 20, font:{size:11} } },
+      tooltip: {
+        backgroundColor: '#1a2235',
+        borderColor: '#334155',
+        borderWidth: 1,
+        padding: 12,
+        callbacks: {
+          label: ctx => {
+            if (ctx.dataset.label === 'ROI %') return `ROI: ${ctx.parsed.y.toFixed(0)}%`;
+            return `${ctx.dataset.label}: $${ctx.parsed.y.toLocaleString()}`;
+          }
+        }
+      }
+    },
+    scales: {
+      y: {
+        type: 'linear',
+        position: 'left',
+        ticks: { callback: v => '$' + (v/1000).toFixed(0) + 'k' },
+        grid: { color: 'rgba(30,41,59,0.4)' },
+        title: { display: true, text: 'USD', color: '#64748b', font:{size:10} }
+      },
+      y1: {
+        type: 'linear',
+        position: 'right',
+        ticks: { callback: v => v + '%', color: '#a78bfa' },
+        grid: { display: false },
+        title: { display: true, text: 'ROI %', color: '#a78bfa', font:{size:10} }
+      },
+      x: { grid: { display: false } }
+    }
+  }
+});
+
+// ─── DAILY SPEND ───
+const ctx2 = document.getElementById('spendChart').getContext('2d');
+new Chart(ctx2, {
+  type: 'bar',
+  data: {
+    labels: dailyData.map(d => d.date),
+    datasets: [{
+      label: 'Spend',
+      data: dailyData.map(d => d.spend),
+      backgroundColor: gradient(ctx2, 'rgba(99,102,241,0.7)', 'rgba(99,102,241,0.2)'),
+      borderColor: '#6366f1',
+      borderWidth: 1,
+      borderRadius: 6,
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => '$' + c.parsed.y } } },
+    scales: {
+      y: { ticks: { callback: v => '$' + v }, grid: { color: 'rgba(30,41,59,0.3)' } },
+      x: { grid: { display: false }, ticks: { font:{size:9} } }
+    }
+  }
+});
+
+// ─── DAILY ROI ───
+const ctx3 = document.getElementById('roiChart').getContext('2d');
+new Chart(ctx3, {
+  type: 'line',
+  data: {
+    labels: dailyData.map(d => d.date),
+    datasets: [{
+      label: 'ROI %',
+      data: dailyData.map(d => d.roi),
+      borderColor: '#a78bfa',
+      backgroundColor: gradient(ctx3, 'rgba(167,139,250,0.15)', 'rgba(167,139,250,0)'),
+      fill: true,
+      tension: 0.4,
+      borderWidth: 2.5,
+      pointRadius: 4,
+      pointBackgroundColor: '#a78bfa',
+      pointBorderColor: '#0a0e1a',
+      pointBorderWidth: 2,
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => c.parsed.y.toFixed(0) + '%' } } },
+    scales: {
+      y: { ticks: { callback: v => v + '%' }, grid: { color: 'rgba(30,41,59,0.3)' } },
+      x: { grid: { display: false }, ticks: { font:{size:9} } }
+    }
+  }
+});
+
+// ─── MONTHLY PROFIT BAR ───
+const ctx4 = document.getElementById('monthlyProfitChart').getContext('2d');
+new Chart(ctx4, {
+  type: 'bar',
+  data: {
+    labels: monthlyCompanies.map(c => c.name),
+    datasets: [{
+      label: 'Profit',
+      data: monthlyCompanies.map(c => c.profit),
+      backgroundColor: monthlyCompanies.map(c => c.color + 'cc'),
+      borderColor: monthlyCompanies.map(c => c.color),
+      borderWidth: 1.5,
+      borderRadius: 10,
+    }]
+  },
+  options: {
+    indexAxis: 'y',
+    responsive: true,
+    layout: { padding: { right: 80 } },
+    plugins: {
+      legend: { display: false },
+      tooltip: { callbacks: { label: c => '$' + c.parsed.x.toLocaleString() } },
+      datalabels: {
+        display: true,
+        align: 'end',
+        anchor: 'end',
+        offset: 6,
+        color: '#e2e8f0',
+        font: { weight: 'bold', size: 12.5 },
+        formatter: v => '$' + v.toLocaleString(),
+      }
+    },
+    scales: {
+      x: { ticks: { callback: v => '$' + (v/1000).toFixed(0) + 'k' }, grid: { color: 'rgba(30,41,59,0.3)' } },
+      y: { grid: { display: false } }
+    }
+  }
+});
+
+// ─── MONTHLY ROI BAR ───
+const ctx5 = document.getElementById('monthlyRoiChart').getContext('2d');
+new Chart(ctx5, {
+  type: 'bar',
+  data: {
+    labels: monthlyCompanies.map(c => c.name),
+    datasets: [{
+      label: 'ROI %',
+      data: monthlyCompanies.map(c => c.roi),
+      backgroundColor: monthlyCompanies.map(c => c.color + 'cc'),
+      borderColor: monthlyCompanies.map(c => c.color),
+      borderWidth: 1.5,
+      borderRadius: 10,
+    }]
+  },
+  options: {
+    indexAxis: 'y',
+    responsive: true,
+    layout: { padding: { right: 80 } },
+    plugins: {
+      legend: { display: false },
+      tooltip: { callbacks: { label: c => c.parsed.x.toFixed(1) + '%' } },
+      datalabels: {
+        display: true,
+        align: 'end',
+        anchor: 'end',
+        offset: 6,
+        color: '#e2e8f0',
+        font: { weight: 'bold', size: 12.5 },
+        formatter: v => v.toFixed(0) + '%',
+      }
+    },
+    scales: {
+      x: { ticks: { callback: v => v + '%' }, grid: { color: 'rgba(30,41,59,0.3)' } },
+      y: { grid: { display: false } }
+    }
+  }
+});
+
+// ─── YESTERDAY PROFIT DOUGHNUT ───
+new Chart(document.getElementById('yesterdayProfitChart').getContext('2d'), {
+  type: 'doughnut',
+  data: {
+    labels: yesterdayCompanies.map(c => c.name),
+    datasets: [{
+      data: yesterdayCompanies.map(c => c.profit),
+      backgroundColor: yesterdayCompanies.map(c => c.color + 'cc'),
+      borderColor: '#111827',
+      borderWidth: 3,
+    }]
+  },
+  options: {
+    responsive: true,
+    cutout: '65%',
+    plugins: {
+      legend: { position: 'bottom', labels: { usePointStyle: true, padding: 16, font:{size:11} } },
+      tooltip: { callbacks: { label: c => c.label + ': $' + c.parsed.toLocaleString() } },
+      datalabels: {
+        display: true,
+        color: '#ffffff',
+        font: { weight: 'bold', size: 12.5 },
+        formatter: (v, ctx) => {
+          const name = ctx.chart.data.labels[ctx.dataIndex];
+          return name + '\n$' + v.toLocaleString();
+        },
+        textAlign: 'center',
+      }
+    }
+  }
+});
+
+// ─── YESTERDAY ROI BAR ───
+new Chart(document.getElementById('yesterdayRoiChart').getContext('2d'), {
+  type: 'bar',
+  data: {
+    labels: yesterdayCompanies.map(c => c.name),
+    datasets: [{
+      label: 'ROI %',
+      data: yesterdayCompanies.map(c => c.roi),
+      backgroundColor: yesterdayCompanies.map(c => c.color + 'cc'),
+      borderColor: yesterdayCompanies.map(c => c.color),
+      borderWidth: 1.5,
+      borderRadius: 10,
+    }]
+  },
+  options: {
+    responsive: true,
+    layout: { padding: { top: 30 } },
+    plugins: {
+      legend: { display: false },
+      tooltip: { callbacks: { label: c => c.parsed.y.toFixed(1) + '%' } },
+      datalabels: {
+        display: true,
+        align: 'end',
+        anchor: 'end',
+        offset: 4,
+        color: '#e2e8f0',
+        font: { weight: 'bold', size: 12.5 },
+        formatter: v => v.toFixed(0) + '%',
+      }
+    },
+    scales: {
+      y: { ticks: { callback: v => v + '%' }, grid: { color: 'rgba(30,41,59,0.3)' } },
+      x: { grid: { display: false } }
+    }
+  }
+});
+
+// ─── POPULATE TABLES ───
+function fmt(n) { return '$' + n.toLocaleString(); }
+function roiColor(r) {
+  if (r >= 1000) return 'background:rgba(16,185,129,0.15);color:#10b981';
+  if (r >= 500) return 'background:rgba(6,182,212,0.15);color:#06b6d4';
+  if (r > 0) return 'background:rgba(245,158,11,0.15);color:#f59e0b';
+  return 'background:rgba(100,116,139,0.1);color:#64748b';
+}
+
+const mtb = document.getElementById('monthlyTable');
+const allMonthly = [...monthlyCompanies];
+allMonthly.forEach(c => {
+  mtb.innerHTML += `<tr>
+    <td><span class="company-name"><span class="company-dot" style="background:${c.color}"></span>${c.name}</span></td>
+    <td>${fmt(c.spend)}</td>
+    <td>${fmt(c.revenue)}</td>
+    <td style="color:${c.profit>0?'#10b981':'#64748b'}">${fmt(c.profit)}</td>
+    <td><span class="roi-badge" style="${roiColor(c.roi)}">${c.roi.toFixed(1)}%</span></td>
+    <td>${fmt(c.runRate)}</td>
+  </tr>`;
+});
+// Grand total
+mtb.innerHTML += `<tr style="border-top:2px solid var(--accent);font-weight:700">
+  <td>Grand Total</td><td>$20,139</td><td>$293,072</td>
+  <td style="color:#10b981">$272,934</td>
+  <td><span class="roi-badge" style="${roiColor(1355)}">1355.2%</span></td>
+  <td>—</td></tr>`;
+
+const ytb = document.getElementById('yesterdayTable');
+const allYesterday = [...yesterdayCompanies];
+allYesterday.forEach(c => {
+  ytb.innerHTML += `<tr>
+    <td><span class="company-name"><span class="company-dot" style="background:${c.color}"></span>${c.name}</span></td>
+    <td>${fmt(c.spend)}</td>
+    <td>${fmt(c.revenue)}</td>
+    <td style="color:${c.profit>0?'#10b981':'#64748b'}">${fmt(c.profit)}</td>
+    <td><span class="roi-badge" style="${roiColor(c.roi)}">${c.roi.toFixed(1)}%</span></td>
+  </tr>`;
+});
+ytb.innerHTML += `<tr style="border-top:2px solid var(--rose);font-weight:700">
+  <td>Grand Total</td><td>$748</td><td>$8,718</td>
+  <td style="color:#10b981">$7,970</td>
+  <td><span class="roi-badge" style="${roiColor(1066)}">1065.9%</span></td></tr>`;
+</script>
+</body>
+</html>
