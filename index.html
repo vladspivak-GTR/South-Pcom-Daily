@@ -176,7 +176,7 @@
     <div class="subtitle">Monthly Performance Report</div>
     <h1>March 2026</h1>
   </div>
-  <div class="date-badge">01 – 02 Mar 2026 · Day 2</div>
+  <div class="date-badge">01 – 04 Mar 2026 · Day 4</div>
 </div>
 
 <div class="main">
@@ -190,32 +190,32 @@
 
   <div class="early-notice animate d1">
     <div class="icon">📅</div>
-    <div class="text"><strong>Early month data.</strong> Showing 2 days of March 2026. Charts and trends will build as more daily data becomes available.</div>
+    <div class="text"><strong>Early month data.</strong> Showing 4 days of March 2026. Charts and trends will build as more daily data becomes available.</div>
   </div>
 
   <div class="kpi-row">
     <div class="kpi-card animate d1">
       <div class="glow" style="background:var(--accent)"></div>
       <div class="label">Total Spend</div>
-      <div class="value" style="color:var(--text)">$1,696</div>
-      <div class="sub">2 days tracked</div>
+      <div class="value" style="color:var(--text)">$3,081</div>
+      <div class="sub">4 days tracked</div>
     </div>
     <div class="kpi-card animate d2">
       <div class="glow" style="background:var(--accent2)"></div>
       <div class="label">Total Revenue</div>
-      <div class="value" style="color:var(--accent2)">$19,167</div>
-      <div class="sub">Avg $9,584/day</div>
+      <div class="value" style="color:var(--accent2)">$37,070</div>
+      <div class="sub">Avg $9,268/day</div>
     </div>
     <div class="kpi-card animate d3">
       <div class="glow" style="background:var(--green)"></div>
       <div class="label">Total Profit</div>
-      <div class="value" style="color:var(--green)">$17,471</div>
-      <div class="sub">Avg $8,736/day</div>
+      <div class="value" style="color:var(--green)">$33,989</div>
+      <div class="sub">Avg $8,497/day</div>
     </div>
     <div class="kpi-card animate d4">
       <div class="glow" style="background:var(--purple)"></div>
       <div class="label">Overall ROI</div>
-      <div class="value" style="color:var(--purple)">1,030%</div>
+      <div class="value" style="color:var(--purple)">1,103%</div>
       <div class="sub">Return on investment</div>
     </div>
   </div>
@@ -229,11 +229,11 @@
   <div class="chart-row">
     <div class="chart-container animate d4">
       <h3>Daily Spend</h3>
-      <canvas id="spendChart" height="130"></canvas>
+      <canvas id="spendChart" height="150"></canvas>
     </div>
     <div class="chart-container animate d5">
       <h3>Daily ROI %</h3>
-      <canvas id="roiChart" height="130"></canvas>
+      <canvas id="roiChart" height="150"></canvas>
     </div>
   </div>
 
@@ -248,7 +248,7 @@
     <div class="kpi-card animate d1">
       <div class="glow" style="background:var(--amber)"></div>
       <div class="label">Run Rate (Monthly)</div>
-      <div class="value" style="color:var(--amber)">$270,801</div>
+      <div class="value" style="color:var(--amber)">$263,416</div>
       <div class="sub">Projected monthly profit</div>
     </div>
     <div class="kpi-card animate d2">
@@ -260,13 +260,13 @@
     <div class="kpi-card animate d3">
       <div class="glow" style="background:var(--purple)"></div>
       <div class="label">Monthly ROI</div>
-      <div class="value" style="color:var(--purple)">1,029%</div>
+      <div class="value" style="color:var(--purple)">1,103%</div>
       <div class="sub">Grand total ROI</div>
     </div>
     <div class="kpi-card animate d4">
       <div class="glow" style="background:var(--accent)"></div>
       <div class="label">Total Profit (MTD)</div>
-      <div class="value" style="color:var(--accent)">$17,471</div>
+      <div class="value" style="color:var(--accent)">$33,989</div>
       <div class="sub">Month to date</div>
     </div>
   </div>
@@ -310,14 +310,14 @@
     <div class="kpi-card animate d1">
       <div class="glow" style="background:var(--green)"></div>
       <div class="label">Yesterday Profit</div>
-      <div class="value" style="color:var(--green)">$8,111</div>
-      <div class="sub">Mar 02, 2026</div>
+      <div class="value" style="color:var(--green)">$7,909</div>
+      <div class="sub">Mar 04, 2026</div>
     </div>
     <div class="kpi-card animate d2">
       <div class="glow" style="background:var(--purple)"></div>
       <div class="label">Yesterday ROI</div>
-      <div class="value" style="color:var(--purple)">1,003%</div>
-      <div class="sub">Return on $808 spend</div>
+      <div class="value" style="color:var(--purple)">1,242%</div>
+      <div class="sub">Return on $637 spend</div>
     </div>
     <div class="kpi-card animate d3">
       <div class="glow" style="background:var(--accent)"></div>
@@ -389,22 +389,24 @@ if(sessionStorage.getItem('dash_mar_unlocked')==='true'){
 const dailyData = [
   {date:'Mar 01',spend:888,revenue:10248,profit:9360,roi:1054.19},
   {date:'Mar 02',spend:808,revenue:8920,profit:8111,roi:1003.33},
+  {date:'Mar 03',spend:748,revenue:9357,profit:8609,roi:1151},
+  {date:'Mar 04',spend:637,revenue:8546,profit:7909,roi:1242},
 ];
 
 const monthlyCompanies = [
-  {name:'Spirion',spend:358,revenue:7220,profit:6862,roi:1912.70,runRate:106365,color:'#0ea5e9'},
-  {name:'Innovate',spend:777,revenue:6657,profit:5880,roi:756.10,runRate:91139,color:'#6366f1'},
-  {name:'Spread',spend:365,revenue:3661,profit:3296,roi:900.69,runRate:51082,color:'#34d399'},
-  {name:'Galatea',spend:197,revenue:1630,profit:1433,roi:723.99,runRate:22215,color:'#fbbf24'},
-  {name:'IMPULSPROM',spend:0,revenue:0,profit:0,roi:-0.11,runRate:0,color:'#fb7185'},
+  {name:'Spirion',spend:658,revenue:14737,profit:14079,roi:2136.51,runRate:109109,color:'#0ea5e9'},
+  {name:'Innovate',spend:1373,revenue:12324,profit:10952,roi:797.24,runRate:84876,color:'#6366f1'},
+  {name:'Spread',spend:673,revenue:6718,profit:6046,roi:897.33,runRate:46854,color:'#34d399'},
+  {name:'Galatea',spend:353,revenue:3271,profit:2918,roi:824.65,runRate:22615,color:'#fbbf24'},
+  {name:'IMPULSPROM',spend:25,revenue:20,profit:-5,roi:-19.00,runRate:-38,color:'#fb7185'},
 ];
 
 const yesterdayCompanies = [
-  {name:'Spirion',spend:176,revenue:3106,profit:2930,roi:1661.55,color:'#0ea5e9'},
-  {name:'Innovate',spend:367,revenue:3034,profit:2667,roi:726.51,color:'#6366f1'},
-  {name:'Spread',spend:171,revenue:1817,profit:1645,roi:959.69,color:'#34d399'},
-  {name:'Galatea',spend:94,revenue:964,profit:870,roi:928.86,color:'#fbbf24'},
-  {name:'IMPULSPROM',spend:0,revenue:0,profit:0,roi:0,color:'#fb7185'},
+  {name:'Spirion',spend:133,revenue:3828,profit:3695,roi:2773.26,color:'#0ea5e9'},
+  {name:'Innovate',spend:265,revenue:2682,profit:2418,roi:913.59,color:'#6366f1'},
+  {name:'Spread',spend:142,revenue:1458,profit:1316,roi:923.90,color:'#34d399'},
+  {name:'Galatea',spend:72,revenue:557,profit:486,roi:677.32,color:'#fbbf24'},
+  {name:'IMPULSPROM',spend:25,revenue:20,profit:-5,roi:-19.76,color:'#fb7185'},
 ];
 
 // ─── CHART DEFAULTS ───
@@ -486,9 +488,10 @@ new Chart(ctx2, {
     borderColor:'#2dd4bf',borderWidth:1,borderRadius:6,
   }]},
   options:{responsive:true,
+    layout:{padding:{top:30}},
     plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>'$'+c.parsed.y}},
-      datalabels:{display:true,align:'end',anchor:'end',offset:4,color:'#e2e8f0',font:{weight:'bold',size:12},formatter:v=>'$'+v}},
-    scales:{y:{ticks:{callback:v=>'$'+v},grid:{color:'rgba(28,38,64,0.3)'}},x:{grid:{display:false}}}
+      datalabels:{display:true,align:'end',anchor:'end',offset:8,color:'#e2e8f0',font:{weight:'bold',size:13},formatter:v=>'$'+v}},
+    scales:{y:{grace:'15%',ticks:{callback:v=>'$'+v},grid:{color:'rgba(28,38,64,0.3)'}},x:{grid:{display:false}}}
   }
 });
 
@@ -503,9 +506,11 @@ new Chart(ctx3, {
     pointBackgroundColor:'#a78bfa',pointBorderColor:'#080b14',pointBorderWidth:3,
   }]},
   options:{responsive:true,
+    layout:{padding:{top:30,right:20}},
     plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>c.parsed.y.toFixed(0)+'%'}},
-      datalabels:{display:true,align:'top',anchor:'end',offset:6,color:'#a78bfa',font:{weight:'bold',size:12},formatter:v=>v.toFixed(0)+'%'}},
-    scales:{y:{ticks:{callback:v=>v+'%'},grid:{color:'rgba(28,38,64,0.3)'}},x:{grid:{display:false}}}
+      datalabels:{display:true,align:'top',anchor:'end',offset:10,color:'#a78bfa',font:{weight:'bold',size:13},
+        formatter:v=>v.toFixed(0)+'%',backgroundColor:'rgba(167,139,250,0.12)',borderRadius:6,padding:{top:4,bottom:4,left:8,right:8}}},
+    scales:{y:{min:0,grace:'15%',ticks:{callback:v=>v+'%'},grid:{color:'rgba(28,38,64,0.3)'}},x:{grid:{display:false}}}
   }
 });
 
@@ -596,10 +601,10 @@ monthlyCompanies.forEach(c=>{
     <td>${c.runRate>0?fmt(c.runRate):'—'}</td></tr>`;
 });
 mtb.innerHTML+=`<tr style="border-top:2px solid var(--accent);font-weight:700">
-  <td>Grand Total</td><td>$1,696</td><td>$19,167</td>
-  <td style="color:#34d399">$17,471</td>
-  <td><span class="roi-badge" style="${roiColor(1029)}">1029.3%</span></td>
-  <td>$270,801</td></tr>`;
+  <td>Grand Total</td><td>$3,081</td><td>$37,070</td>
+  <td style="color:#34d399">$33,989</td>
+  <td><span class="roi-badge" style="${roiColor(1103)}">1102.8%</span></td>
+  <td>$263,416</td></tr>`;
 
 const ytb=document.getElementById('yesterdayTable');
 yesterdayCompanies.forEach(c=>{
@@ -610,9 +615,9 @@ yesterdayCompanies.forEach(c=>{
     <td><span class="roi-badge" style="${roiColor(c.roi)}">${c.roi>0?c.roi.toFixed(1)+'%':'inactive'}</span></td></tr>`;
 });
 ytb.innerHTML+=`<tr style="border-top:2px solid var(--rose);font-weight:700">
-  <td>Grand Total</td><td>$808</td><td>$8,920</td>
-  <td style="color:#34d399">$8,111</td>
-  <td><span class="roi-badge" style="${roiColor(1003)}">1003.3%</span></td></tr>`;
+  <td>Grand Total</td><td>$637</td><td>$8,546</td>
+  <td style="color:#34d399">$7,909</td>
+  <td><span class="roi-badge" style="${roiColor(1242)}">1241.7%</span></td></tr>`;
 </script>
 </body>
 </html>
