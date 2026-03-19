@@ -150,6 +150,7 @@
     <div class="kpi-card animate d2"><div class="glow" style="background:var(--accent2)"></div><div class="label">Total Revenue</div><div class="value" style="color:var(--accent2)">$203,189</div><div class="sub">Avg $11,288/day</div></div>
     <div class="kpi-card animate d3"><div class="glow" style="background:var(--green)"></div><div class="label">Total Profit</div><div class="value" style="color:var(--green)">$186,269</div><div class="sub">Avg $10,348/day</div></div>
     <div class="kpi-card animate d4"><div class="glow" style="background:var(--purple)"></div><div class="label">Overall ROI</div><div class="value" style="color:var(--purple)">1,101%</div><div class="sub">Return on investment</div></div>
+    <div class="kpi-card animate d5"><div class="glow" style="background:var(--amber)"></div><div class="label">Profit Margin</div><div class="value" style="color:var(--amber)">91.7%</div><div class="sub">Profit / Revenue ratio</div></div>
   </div>
   <div class="chart-container animate d3"><h3>Daily Profit & ROI Trend</h3><canvas id="dailyChart" height="140"></canvas></div>
   <div class="chart-row"><div class="chart-container animate d4"><h3>Daily Spend</h3><canvas id="spendChart" height="150"></canvas></div><div class="chart-container animate d5"><h3>Daily ROI %</h3><canvas id="roiChart" height="150"></canvas></div></div>
@@ -162,6 +163,7 @@
     <div class="kpi-card animate d4"><div class="glow" style="background:var(--accent)"></div><div class="label">Total Profit (MTD)</div><div class="value" style="color:var(--accent)">$186,269</div><div class="sub">Month to date</div></div>
   </div>
   <div class="chart-row"><div class="chart-container animate d4"><h3>Company Profit Breakdown</h3><canvas id="monthlyProfitChart" height="170"></canvas></div><div class="chart-container animate d5"><h3>Company ROI Comparison</h3><canvas id="monthlyRoiChart" height="170"></canvas></div></div>
+  <div class="chart-container animate d5"><h3>Spend vs Profit — Company Efficiency</h3><canvas id="efficiencyChart" height="120"></canvas></div>
   <div class="table-wrap animate d5"><h3>Monthly Company Performance</h3><table><thead><tr><th>Company</th><th>Spend</th><th>Revenue</th><th>Profit</th><th>ROI %</th><th>Run Rate</th></tr></thead><tbody id="monthlyTable"></tbody></table></div>
 
   <div class="section-title animate d1" style="margin-top:20px"><span class="dot" style="background:var(--rose);color:var(--rose)"></span>Yesterday's Performance — By Company<span class="line"></span></div>
@@ -206,6 +208,19 @@ const aM=monthlyCompanies.filter(c=>c.profit>0);
 new Chart(document.getElementById('monthlyProfitChart').getContext('2d'),{type:'bar',data:{labels:aM.map(c=>c.name),datasets:[{label:'Profit',data:aM.map(c=>c.profit),backgroundColor:aM.map(c=>c.color+'cc'),borderColor:aM.map(c=>c.color),borderWidth:1.5,borderRadius:12}]},options:{indexAxis:'y',responsive:true,layout:{padding:{right:90}},plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>'$'+c.parsed.x.toLocaleString()}},datalabels:{display:true,align:'end',anchor:'end',offset:8,color:'#e8eff8',font:{weight:800,size:14},formatter:v=>'$'+v.toLocaleString()}},scales:{x:{ticks:{callback:v=>'$'+(v/1000).toFixed(0)+'k',font:{weight:700}},grid:{color:'rgba(26,39,68,0.3)'}},y:{grid:{display:false},ticks:{font:{weight:700}}}}}});
 
 new Chart(document.getElementById('monthlyRoiChart').getContext('2d'),{type:'bar',data:{labels:aM.map(c=>c.name),datasets:[{label:'ROI %',data:aM.map(c=>c.roi),backgroundColor:aM.map(c=>c.color+'cc'),borderColor:aM.map(c=>c.color),borderWidth:1.5,borderRadius:12}]},options:{indexAxis:'y',responsive:true,layout:{padding:{right:90}},plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>c.parsed.x.toFixed(1)+'%'}},datalabels:{display:true,align:'end',anchor:'end',offset:8,color:'#e8eff8',font:{weight:800,size:14},formatter:v=>v.toFixed(0)+'%'}},scales:{x:{ticks:{callback:v=>v+'%',font:{weight:700}},grid:{color:'rgba(26,39,68,0.3)'}},y:{grid:{display:false},ticks:{font:{weight:700}}}}}});
+
+// ─── SPEND VS PROFIT EFFICIENCY ───
+const effCtx=document.getElementById('efficiencyChart').getContext('2d');
+const effData=aM.map(c=>({name:c.name,spend:c.spend,profit:c.profit,ratio:(c.profit/c.spend).toFixed(1),color:c.color}));
+new Chart(effCtx,{type:'bar',data:{labels:effData.map(d=>d.name),datasets:[
+  {label:'Spend',data:effData.map(d=>d.spend),backgroundColor:'rgba(251,113,133,0.6)',borderColor:'#fb7185',borderWidth:1.5,borderRadius:8},
+  {label:'Profit',data:effData.map(d=>d.profit),backgroundColor:effData.map(d=>d.color+'aa'),borderColor:effData.map(d=>d.color),borderWidth:1.5,borderRadius:8}
+]},options:{responsive:true,layout:{padding:{top:35}},
+  plugins:{legend:{position:'top',labels:{usePointStyle:true,padding:20,font:{size:12,weight:700}}},
+    tooltip:{callbacks:{label:c=>c.dataset.label+': $'+c.parsed.y.toLocaleString()}},
+    datalabels:{display:function(ctx){return ctx.datasetIndex===1},align:'end',anchor:'end',offset:6,color:'#e8eff8',font:{weight:800,size:12},
+      formatter:function(v,ctx){const sp=effData[ctx.dataIndex].spend;return'$'+sp+' → $'+v.toLocaleString()+' ('+effData[ctx.dataIndex].ratio+'x)'}}},
+  scales:{y:{grace:'20%',ticks:{callback:v=>'$'+(v/1000).toFixed(0)+'k',font:{weight:700}},grid:{color:'rgba(26,39,68,0.3)'}},x:{grid:{display:false},ticks:{font:{weight:700}}}}}});
 
 const aY=yesterdayCompanies.filter(c=>c.profit>0);
 new Chart(document.getElementById('yesterdayProfitChart').getContext('2d'),{type:'doughnut',data:{labels:aY.map(c=>c.name),datasets:[{data:aY.map(c=>c.profit),backgroundColor:aY.map(c=>c.color+'cc'),borderColor:'#0c1220',borderWidth:4}]},options:{responsive:true,cutout:'62%',plugins:{legend:{position:'bottom',labels:{usePointStyle:true,padding:18,font:{size:12,weight:700}}},tooltip:{callbacks:{label:c=>c.label+': $'+c.parsed.toLocaleString()}},datalabels:{display:true,color:'#fff',font:{weight:800,size:13},formatter:(v,ctx)=>{return ctx.chart.data.labels[ctx.dataIndex]+'\n$'+v.toLocaleString()},textAlign:'center'}}}});
