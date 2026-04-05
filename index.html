@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>March 2026 — Performance Dashboard</title>
+<title>April 2026 — Performance Dashboard</title>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@600;700;800;900&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.2.0/chartjs-plugin-datalabels.min.js"></script>
@@ -162,132 +162,43 @@
 </style>
 </head>
 <body>
-<div id="password-gate"><div class="gate-box"><div class="gate-icon">🔒</div><div class="gate-logo">March 2026</div><div class="gate-sub">Performance Dashboard</div><input type="password" id="gate-password" class="gate-input" placeholder="Enter password" autofocus onkeydown="if(event.key==='Enter')checkPassword()"><button class="gate-btn" onclick="checkPassword()">Unlock Dashboard</button><div class="gate-error" id="gate-error"></div></div></div>
+<div id="password-gate"><div class="gate-box"><div class="gate-icon">🔒</div><div class="gate-logo">April 2026</div><div class="gate-sub">Performance Dashboard</div><input type="password" id="gate-password" class="gate-input" placeholder="Enter password" autofocus onkeydown="if(event.key==='Enter')checkPassword()"><button class="gate-btn" onclick="checkPassword()">Unlock Dashboard</button><div class="gate-error" id="gate-error"></div></div></div>
 <div id="dashboard-content">
-<div class="header"><div><div class="subtitle">Monthly Performance Report</div><h1>March 2026</h1></div><div class="date-badge">01 – 31 Mar 2026 · Full Month</div></div>
+<div class="header"><div><div class="subtitle">Monthly Performance Report</div><h1>April 2026</h1></div><div class="date-badge">01 – 04 Apr 2026 · Day 4</div></div>
 <div class="main">
   <div class="section-title animate d1"><span class="dot" style="background:var(--accent);color:var(--accent)"></span>Monthly Overview<span class="line"></span></div>
-  <div class="early-notice animate d1"><div class="icon">🏁</div><div class="text"><strong>March 2026 — Complete.</strong> 6 companies active and profitable. $334K total profit at 1,025% ROI across 31 days. Every dollar spent returned $11.25.</div></div>
+  <div class="early-notice animate d1"><div class="icon">📊</div><div class="text"><strong>4 days into April.</strong> 6 companies active and profitable. $43K total profit at 881% ROI. Run rate $322K.</div></div>
   <div class="kpi-row">
-    <div class="kpi-card animate d1"><div class="glow" style="background:var(--accent)"></div><div class="label">Total Spend</div><div class="value" style="color:var(--text)">$32,593</div><div class="sub">31 days · Full month</div></div>
-    <div class="kpi-card animate d2"><div class="glow" style="background:var(--accent2)"></div><div class="label">Total Revenue</div><div class="value" style="color:var(--accent2)">$366,604</div><div class="sub">Avg $11,826/day</div></div>
-    <div class="kpi-card animate d3"><div class="glow" style="background:var(--green)"></div><div class="label">Total Profit</div><div class="value" style="color:var(--green)">$334,010</div><div class="sub">Avg $10,775/day</div></div>
-    <div class="kpi-card animate d4"><div class="glow" style="background:var(--purple)"></div><div class="label">Overall ROI</div><div class="value" style="color:var(--purple)">1,025%</div><div class="sub">Return on investment</div></div>
-    <div class="kpi-card animate d5"><div class="glow" style="background:var(--amber)"></div><div class="label">Profit Margin</div><div class="value" style="color:var(--amber)">91.1%</div><div class="sub">Profit / Revenue ratio</div></div>
+    <div class="kpi-card animate d1"><div class="glow" style="background:var(--accent)"></div><div class="label">Total Spend</div><div class="value" style="color:var(--text)">$4,876</div><div class="sub">4 days tracked</div></div>
+    <div class="kpi-card animate d2"><div class="glow" style="background:var(--accent2)"></div><div class="label">Total Revenue</div><div class="value" style="color:var(--accent2)">$47,824</div><div class="sub">Avg $11,956/day</div></div>
+    <div class="kpi-card animate d3"><div class="glow" style="background:var(--green)"></div><div class="label">Total Profit</div><div class="value" style="color:var(--green)">$42,948</div><div class="sub">Avg $10,737/day</div></div>
+    <div class="kpi-card animate d4"><div class="glow" style="background:var(--purple)"></div><div class="label">Overall ROI</div><div class="value" style="color:var(--purple)">881%</div><div class="sub">Return on investment</div></div>
+    <div class="kpi-card animate d5"><div class="glow" style="background:var(--amber)"></div><div class="label">Profit Margin</div><div class="value" style="color:var(--amber)">89.8%</div><div class="sub">Profit / Revenue ratio</div></div>
   </div>
   <div class="chart-container animate d3"><h3>Daily Profit & ROI Trend</h3><canvas id="dailyChart" height="140"></canvas></div>
   <div class="chart-row"><div class="chart-container animate d4"><h3>Daily Spend</h3><canvas id="spendChart" height="150"></canvas></div><div class="chart-container animate d5"><h3>Daily ROI %</h3><canvas id="roiChart" height="150"></canvas></div></div>
 
   <div class="section-title animate d1" style="margin-top:20px"><span class="dot" style="background:var(--accent2);color:var(--accent2)"></span>Monthly Dashboard — By Company<span class="line"></span></div>
   <div class="kpi-row">
-    <div class="kpi-card animate d1"><div class="glow" style="background:var(--amber)"></div><div class="label">Final Monthly Profit</div><div class="value" style="color:var(--amber)">$334,010</div><div class="sub">March 2026 closed</div></div>
+    <div class="kpi-card animate d1"><div class="glow" style="background:var(--amber)"></div><div class="label">Run Rate (Monthly)</div><div class="value" style="color:var(--amber)">$322,111</div><div class="sub">Projected monthly profit</div></div>
     <div class="kpi-card animate d2"><div class="glow" style="background:var(--green)"></div><div class="label">Companies in Profit</div><div class="value" style="color:var(--green)">6</div><div class="sub">of 6 active companies</div></div>
-    <div class="kpi-card animate d3"><div class="glow" style="background:var(--purple)"></div><div class="label">Monthly ROI</div><div class="value" style="color:var(--purple)">1,025%</div><div class="sub">Grand total ROI</div></div>
-    <div class="kpi-card animate d4"><div class="glow" style="background:var(--accent)"></div><div class="label">Revenue Multiple</div><div class="value" style="color:var(--accent)">11.2x</div><div class="sub">Revenue / Spend ratio</div></div>
+    <div class="kpi-card animate d3"><div class="glow" style="background:var(--purple)"></div><div class="label">Monthly ROI</div><div class="value" style="color:var(--purple)">881%</div><div class="sub">Grand total ROI</div></div>
+    <div class="kpi-card animate d4"><div class="glow" style="background:var(--accent)"></div><div class="label">Total Profit (MTD)</div><div class="value" style="color:var(--accent)">$42,948</div><div class="sub">Month to date</div></div>
   </div>
   <div class="chart-row"><div class="chart-container animate d4"><h3>Company Profit Breakdown</h3><canvas id="monthlyProfitChart" height="170"></canvas></div><div class="chart-container animate d5"><h3>Company ROI Comparison</h3><canvas id="monthlyRoiChart" height="170"></canvas></div></div>
   <div class="chart-container animate d5"><h3>Spend vs Profit — Company Efficiency</h3><canvas id="efficiencyChart" height="120"></canvas></div>
   <div class="table-wrap animate d5"><h3>Monthly Company Performance</h3><table><thead><tr><th>Company</th><th>Spend</th><th>Revenue</th><th>Profit</th><th>ROI %</th><th>Run Rate</th></tr></thead><tbody id="monthlyTable"></tbody></table></div>
 
-  <div class="section-title animate d1" style="margin-top:20px"><span class="dot" style="background:var(--rose);color:var(--rose)"></span>Last Day — Mar 31 · By Company<span class="line"></span></div>
+  <div class="section-title animate d1" style="margin-top:20px"><span class="dot" style="background:var(--rose);color:var(--rose)"></span>Yesterday's Performance — By Company<span class="line"></span></div>
   <div class="kpi-row">
-    <div class="kpi-card animate d1"><div class="glow" style="background:var(--green)"></div><div class="label">Last Day Profit</div><div class="value" style="color:var(--green)">$11,453</div><div class="sub">Mar 31, 2026</div></div>
-    <div class="kpi-card animate d2"><div class="glow" style="background:var(--purple)"></div><div class="label">Last Day ROI</div><div class="value" style="color:var(--purple)">876%</div><div class="sub">Return on $1,308 spend</div></div>
+    <div class="kpi-card animate d1"><div class="glow" style="background:var(--green)"></div><div class="label">Yesterday Profit</div><div class="value" style="color:var(--green)">$8,134</div><div class="sub">Apr 04, 2026</div></div>
+    <div class="kpi-card animate d2"><div class="glow" style="background:var(--purple)"></div><div class="label">Yesterday ROI</div><div class="value" style="color:var(--purple)">598%</div><div class="sub">Return on $1,360 spend</div></div>
     <div class="kpi-card animate d3"><div class="glow" style="background:var(--accent)"></div><div class="label">Active Companies</div><div class="value" style="color:var(--accent)">6</div><div class="sub">Generating revenue</div></div>
   </div>
   <div class="chart-row"><div class="chart-container animate d4"><h3>Yesterday — Company Profit</h3><canvas id="yesterdayProfitChart" height="170"></canvas></div><div class="chart-container animate d5"><h3>Yesterday — Company ROI</h3><canvas id="yesterdayRoiChart" height="170"></canvas></div></div>
-  <div class="table-wrap animate d6"><h3>Last Day — Mar 31 Breakdown</h3><table><thead><tr><th>Company</th><th>Spend</th><th>Revenue</th><th>Profit</th><th>ROI %</th></tr></thead><tbody id="yesterdayTable"></tbody></table></div>
-  <div class="section-title animate d1" style="margin-top:40px"><span class="dot" style="background:linear-gradient(135deg,var(--accent),var(--accent2));color:var(--accent)"></span>Month-End Insights · March 2026<span class="line"></span></div>
-
-  <div class="insights-wrap animate d2">
-    <div class="insights-header">
-      <div class="icon-wrap">📈</div>
-      <div><h3>Executive Summary</h3><div class="month-tag">March 1 – 31, 2026 · Final Report</div></div>
-    </div>
-
-    <div class="insight-grid">
-      <div class="insight-card">
-        <div class="insight-label" style="color:var(--green)"><span class="tag" style="background:var(--green)"></span>Bottom Line</div>
-        <div class="insight-body">
-          <span class="highlight" style="color:var(--green)">$334,010 net profit</span>
-          Generated from just <strong>$32,593 in total spend</strong> — a <strong>1,025% return</strong> on every dollar invested. The portfolio maintained a <strong>91.1% profit margin</strong> across the entire month.
-        </div>
-      </div>
-
-      <div class="insight-card">
-        <div class="insight-label" style="color:var(--accent2)"><span class="tag" style="background:var(--accent2)"></span>Revenue Engine</div>
-        <div class="insight-body">
-          <span class="highlight" style="color:var(--accent2)">$366,604 total revenue</span>
-          Averaging <strong>$11,826/day</strong> across 31 days. Peak revenue hit <strong>$16,433 on Mar 14</strong>, while the lowest was $8,920 on Mar 4 — demonstrating consistent performance with a healthy floor.
-        </div>
-      </div>
-
-      <div class="insight-card">
-        <div class="insight-label" style="color:#38bdf8"><span class="tag" style="background:#38bdf8"></span>Top Performer — Spirion</div>
-        <div class="insight-body">
-          <span class="highlight" style="color:#38bdf8">$122,488 profit · 1,961% ROI</span>
-          Spirion dominated with <strong>36.7% of total profit</strong> on just <strong>19.2% of total spend</strong>. At nearly 20x returns, it delivered the highest capital efficiency in the portfolio by a wide margin.
-        </div>
-      </div>
-
-      <div class="insight-card">
-        <div class="insight-label" style="color:#818cf8"><span class="tag" style="background:#818cf8"></span>Volume Leader — Innovate</div>
-        <div class="insight-body">
-          <span class="highlight" style="color:#818cf8">$102,889 profit · 850% ROI</span>
-          The highest-spend company at <strong>$12,098</strong> (37.1% of budget), Innovate delivered the second-largest absolute profit. A reliable workhorse producing <strong>$114,987 in revenue</strong>.
-        </div>
-      </div>
-
-      <div class="insight-card">
-        <div class="insight-label" style="color:var(--green)"><span class="tag" style="background:var(--green)"></span>Consistent Earner — Spread</div>
-        <div class="insight-body">
-          <span class="highlight" style="color:var(--green)">$68,698 profit · 916% ROI</span>
-          Third in profit with <strong>$76,196 revenue</strong> on $7,497 spend. Spread maintained strong efficiency at a <strong>9.2x return</strong>, making it a well-balanced mid-tier performer.
-        </div>
-      </div>
-
-      <div class="insight-card">
-        <div class="insight-label" style="color:var(--amber)"><span class="tag" style="background:var(--amber)"></span>Rising Star — Galatea</div>
-        <div class="insight-body">
-          <span class="highlight" style="color:var(--amber)">$35,547 profit · 982% ROI</span>
-          On a modest <strong>$3,619 spend</strong>, Galatea punched above its weight with nearly <strong>10x returns</strong>. Strong candidate for increased allocation in April given its efficiency profile.
-        </div>
-      </div>
-
-      <div class="insight-card">
-        <div class="insight-label" style="color:var(--purple)"><span class="tag" style="background:var(--purple)"></span>Best & Worst Days</div>
-        <div class="insight-body">
-          <strong>Peak profit:</strong> Mar 14 at <strong>$15,451</strong> (1,574% ROI) — the month's best single-day result.<br>
-          <strong>Lowest profit:</strong> Mar 4 at <strong>$8,279</strong> — still profitable at 1,292% ROI.<br>
-          <strong>Peak ROI:</strong> Mar 13 at <strong>1,689%</strong> on just $892 spend — the most efficient day.
-        </div>
-      </div>
-
-      <div class="insight-card">
-        <div class="insight-label" style="color:var(--rose)"><span class="tag" style="background:var(--rose)"></span>Spend Trend & Efficiency</div>
-        <div class="insight-body">
-          Daily spend increased from <strong>$641–$888 in Week 1</strong> to <strong>$1,182–$1,369 in Week 4</strong>. While spend nearly doubled, ROI naturally compressed from ~1,100% to ~800% — a classic scaling pattern where <strong>absolute profit grew</strong> even as marginal returns decreased.
-        </div>
-      </div>
-
-      <div class="insight-card full-width">
-        <div class="insight-label" style="color:#f472b6"><span class="tag" style="background:#f472b6"></span>Portfolio Composition & Diversification</div>
-        <div class="insight-body">
-          <strong>Spirion + Innovate</strong> combined for <strong>67.4%</strong> of total profit ($225,377), making them the portfolio's twin engines. <strong>Spread + Galatea</strong> contributed <strong>31.2%</strong> ($104,245) as the reliable mid-tier. <strong>IMPULSPROM</strong> provided <strong>$4,193</strong> at 135% ROI — profitable but significantly lower efficiency, suggesting room for optimization. <strong>omnia</strong> entered late in the month with promising early signals: <strong>742% ROI</strong> on just $25 spend — worth scaling in April.
-        </div>
-      </div>
-    </div>
-
-    <div class="verdict-bar">
-      <div class="verdict-icon">✅</div>
-      <div class="verdict-text">
-        March closed with <span>$334K profit on $32.6K spend</span> — a <span>10.25x return</span>. All 6 active companies ended profitable. Zero loss days across 31 days. The portfolio demonstrated strong resilience with a worst-day floor of $8,279 and a profit margin never dropping below 88%. This was a textbook month of efficient capital deployment at scale.
-      </div>
-    </div>
-  </div>
-
+  <div class="table-wrap animate d6"><h3>Yesterday Company Breakdown</h3><table><thead><tr><th>Company</th><th>Spend</th><th>Revenue</th><th>Profit</th><th>ROI %</th></tr></thead><tbody id="yesterdayTable"></tbody></table></div>
 </div>
-<div class="footer">DASHBOARD · MARCH 2026 · FINAL REPORT · ALL FIGURES IN USD</div>
+<div class="footer">DASHBOARD · APRIL 2026 · ALL FIGURES IN USD</div>
 </div>
 
 <script>
@@ -296,9 +207,9 @@ function checkPassword(){const i=document.getElementById('gate-password'),e=docu
 if(sessionStorage.getItem('dash_mar_unlocked')==='true'){document.getElementById('password-gate').classList.add('hidden');document.getElementById('dashboard-content').classList.add('visible')}
 </script>
 <script>
-const dailyData=[{date:'Mar 01',spend:888,revenue:10336,profit:9448,roi:1064.15},{date:'Mar 02',spend:810,revenue:9204,profit:8394,roi:1036.93},{date:'Mar 03',spend:750,revenue:9723,profit:8973,roi:1195.56},{date:'Mar 04',spend:641,revenue:8920,profit:8279,roi:1292},{date:'Mar 05',spend:784,revenue:9580,profit:8796,roi:1121},{date:'Mar 06',spend:889,revenue:9536,profit:8647,roi:973},{date:'Mar 07',spend:958,revenue:9962,profit:9004,roi:940},{date:'Mar 08',spend:1102,revenue:10230,profit:9128,roi:828},{date:'Mar 09',spend:1000,revenue:10927,profit:9928,roi:993},{date:'Mar 10',spend:932,revenue:11404,profit:10472,roi:1124},{date:'Mar 11',spend:899,revenue:12917,profit:12017,roi:1336},{date:'Mar 12',spend:1381,revenue:12465,profit:11084,roi:803},{date:'Mar 13',spend:892,revenue:15958,profit:15066,roi:1689},{date:'Mar 14',spend:981,revenue:16433,profit:15451,roi:1574},{date:'Mar 15',spend:1131,revenue:12457,profit:11326,roi:1002},{date:'Mar 16',spend:895,revenue:11864,profit:10969,roi:1226},{date:'Mar 17',spend:983,revenue:11780,profit:10797,roi:1098},{date:'Mar 18',spend:996,revenue:11498,profit:10502,roi:1054},{date:'Mar 19',spend:979,revenue:10454,profit:9475,roi:968},{date:'Mar 20',spend:982,revenue:14488,profit:13506,roi:1376},{date:'Mar 21',spend:1074,revenue:10521,profit:9447,roi:879},{date:'Mar 22',spend:1348,revenue:11309,profit:9961,roi:739},{date:'Mar 23',spend:1181,revenue:13920,profit:12738,roi:1078.48},{date:'Mar 24',spend:1192,revenue:14669,profit:13477,roi:1130.21},{date:'Mar 25',spend:1212,revenue:12406,profit:11194,roi:923},{date:'Mar 26',spend:1260,revenue:13439,profit:12179,roi:967},{date:'Mar 27',spend:1182,revenue:12578,profit:11397,roi:965},{date:'Mar 28',spend:1272,revenue:11520,profit:10248,roi:806},{date:'Mar 29',spend:1369,revenue:11241,profit:9871,roi:721},{date:'Mar 30',spend:1321,revenue:12103,profit:10782,roi:816},{date:'Mar 31',spend:1308,revenue:12761,profit:11453,roi:876}];
-const monthlyCompanies=[{name:'Spirion',spend:6245,revenue:128733,profit:122488,roi:1960.93,runRate:122208,color:'#38bdf8'},{name:'Innovate',spend:12098,revenue:114987,profit:102889,roi:850.37,runRate:103231,color:'#818cf8'},{name:'Spread',spend:7497,revenue:76196,profit:68698,roi:916.20,runRate:69206,color:'#34d399'},{name:'Galatea',spend:3619,revenue:39165,profit:35547,roi:982.07,runRate:34717,color:'#fbbf24'},{name:'IMPULSPROM',spend:3108,revenue:7302,profit:4193,roi:134.85,runRate:3770,color:'#fb7185'},{name:'omnia',spend:25,revenue:221,profit:195,roi:742.32,runRate:178,color:'#f472b6'}];
-const yesterdayCompanies=[{name:'Innovate',spend:395,revenue:3383,profit:2988,roi:756.26,color:'#818cf8'},{name:'Spirion',spend:230,revenue:4451,profit:4222,roi:1839.50,color:'#38bdf8'},{name:'Spread',spend:324,revenue:2049,profit:1725,roi:532.04,color:'#34d399'},{name:'Galatea',spend:177,revenue:2127,profit:1950,roi:1101.20,color:'#fbbf24'},{name:'IMPULSPROM',spend:179,revenue:724,profit:545,roi:303.63,color:'#fb7185'},{name:'omnia',spend:3,revenue:26,profit:23,roi:872.22,color:'#f472b6'}];
+const dailyData=[{date:'Apr 01',spend:1279,revenue:13857,profit:12578,roi:983.34},{date:'Apr 02',spend:1169,revenue:12560,profit:11390,roi:973.97},{date:'Apr 03',spend:1067,revenue:11912,profit:10845,roi:1016},{date:'Apr 04',spend:1360,revenue:9495,profit:8134,roi:598}];
+const monthlyCompanies=[{name:'Spirion',spend:800,revenue:17428,profit:16627,roi:2075.00,runRate:124704,color:'#38bdf8'},{name:'Innovate',spend:1294,revenue:10825,profit:9531,roi:736.20,runRate:71482,color:'#818cf8'},{name:'Spread',spend:1292,revenue:10611,profit:9319,roi:721.01,runRate:69894,color:'#34d399'},{name:'Galatea',spend:733,revenue:6446,profit:5713,roi:778.28,runRate:42845,color:'#fbbf24'},{name:'IMPULSPROM',spend:749,revenue:2398,profit:1649,roi:219.99,runRate:12367,color:'#fb7185'},{name:'omnia',spend:9,revenue:118,profit:109,roi:1096.90,runRate:819,color:'#f472b6'}];
+const yesterdayCompanies=[{name:'Innovate',spend:357,revenue:1341,profit:984,roi:275.38,color:'#818cf8'},{name:'Spirion',spend:241,revenue:4064,profit:3823,roi:1583.73,color:'#38bdf8'},{name:'Spread',spend:363,revenue:2099,profit:1736,roi:478.65,color:'#34d399'},{name:'Galatea',spend:173,revenue:1361,profit:1188,roi:685.91,color:'#fbbf24'},{name:'IMPULSPROM',spend:223,revenue:608,profit:385,roi:172.71,color:'#fb7185'},{name:'omnia',spend:3,revenue:21,profit:18,roi:672.62,color:'#f472b6'}];
 
 Chart.register(ChartDataLabels);Chart.defaults.color='#6b85a8';Chart.defaults.borderColor='rgba(26,39,68,0.6)';Chart.defaults.font.family="'Plus Jakarta Sans',sans-serif";Chart.defaults.font.weight=600;Chart.defaults.plugins.datalabels={display:false};
 function grad(ctx,c1,c2){const g=ctx.createLinearGradient(0,0,0,400);g.addColorStop(0,c1);g.addColorStop(1,c2);return g}
@@ -341,9 +252,9 @@ new Chart(document.getElementById('yesterdayRoiChart').getContext('2d'),{type:'b
 
 function fmt(n){return'$'+n.toLocaleString()}function rc(r){if(r>=1000)return'background:rgba(52,211,153,0.15);color:#34d399';if(r>=500)return'background:rgba(56,189,248,0.15);color:#38bdf8';if(r>0)return'background:rgba(251,191,36,0.15);color:#fbbf24';return'background:rgba(107,133,168,0.1);color:#6b85a8'}
 const mt=document.getElementById('monthlyTable');monthlyCompanies.forEach(c=>{mt.innerHTML+='<tr><td><span class="company-name"><span class="company-dot" style="background:'+c.color+';color:'+c.color+'"></span>'+c.name+'</span></td><td>'+fmt(c.spend)+'</td><td>'+fmt(c.revenue)+'</td><td style="color:'+(c.profit>0?'#34d399':'#6b85a8')+'">'+fmt(c.profit)+'</td><td><span class="roi-badge" style="'+rc(c.roi)+'">'+c.roi.toFixed(1)+'%</span></td><td>'+(c.runRate>0?fmt(c.runRate):'—')+'</td></tr>'});
-mt.innerHTML+='<tr style="border-top:2px solid var(--accent);font-weight:800"><td>Grand Total</td><td>$32,593</td><td>$366,604</td><td style="color:#34d399">$334,010</td><td><span class="roi-badge" style="'+rc(1025)+'">1024.8%</span></td><td>—</td></tr>';
+mt.innerHTML+='<tr style="border-top:2px solid var(--accent);font-weight:800"><td>Grand Total</td><td>$4,876</td><td>$47,824</td><td style="color:#34d399">$42,948</td><td><span class="roi-badge" style="'+rc(881)+'">880.6%</span></td><td>$322,111</td></tr>';
 const yt=document.getElementById('yesterdayTable');yesterdayCompanies.forEach(c=>{yt.innerHTML+='<tr><td><span class="company-name"><span class="company-dot" style="background:'+c.color+';color:'+c.color+'"></span>'+c.name+'</span></td><td>'+fmt(c.spend)+'</td><td>'+fmt(c.revenue)+'</td><td style="color:'+(c.profit>0?'#34d399':'#6b85a8')+'">'+fmt(c.profit)+'</td><td><span class="roi-badge" style="'+rc(c.roi)+'">'+(c.roi>0?c.roi.toFixed(1)+'%':'inactive')+'</span></td></tr>'});
-yt.innerHTML+='<tr style="border-top:2px solid var(--rose);font-weight:800"><td>Grand Total</td><td>$1,308</td><td>$12,761</td><td style="color:#34d399">$11,453</td><td><span class="roi-badge" style="'+rc(876)+'">875.6%</span></td></tr>';
+yt.innerHTML+='<tr style="border-top:2px solid var(--rose);font-weight:800"><td>Grand Total</td><td>$1,360</td><td>$9,495</td><td style="color:#34d399">$8,134</td><td><span class="roi-badge" style="'+rc(598)+'">597.9%</span></td></tr>';
 </script>
 </body>
 </html>
