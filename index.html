@@ -81,6 +81,45 @@
   .verdict-bar .verdict-text span{color:var(--green);font-weight:800}
   @media(max-width:768px){.insight-grid{grid-template-columns:1fr}.insights-wrap{padding:28px 22px}.insight-card .insight-body .highlight{font-size:1.3rem}}
   @media(max-width:480px){.insights-wrap{padding:22px 16px}.insights-header h3{font-size:1.2rem}.insight-card{padding:18px 20px}.insight-card .insight-body{font-size:0.82rem}.verdict-bar{flex-direction:column;text-align:center;gap:10px;padding:18px 20px}}
+  /* ── PROGRESS BARS / GOALS ── */
+  .goals-wrap{background:var(--surface);border:1.5px solid var(--border);border-radius:22px;padding:36px 38px;margin-bottom:36px;position:relative;overflow:hidden}
+  .goals-wrap::before{content:'';position:absolute;top:-80px;right:-80px;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,rgba(45,212,191,0.06),transparent);filter:blur(50px)}
+  .goals-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:32px;position:relative;z-index:1}
+  .goals-header-left{display:flex;align-items:center;gap:14px}
+  .goals-header-left .icon-wrap{width:48px;height:48px;border-radius:14px;background:linear-gradient(135deg,rgba(45,212,191,0.15),rgba(56,189,248,0.15));display:flex;align-items:center;justify-content:center;font-size:1.4rem}
+  .goals-header-left h3{font-family:'Outfit',sans-serif;font-size:1.4rem;font-weight:800;color:var(--text);letter-spacing:-0.5px}
+  .goals-header-left .goals-sub{font-size:0.72rem;text-transform:uppercase;letter-spacing:2px;color:var(--text-dim);font-weight:700;margin-top:2px}
+  .goals-header-right{text-align:right}
+  .goals-header-right .days-label{font-size:0.68rem;text-transform:uppercase;letter-spacing:2px;color:var(--text-dim);font-weight:700}
+  .goals-header-right .days-value{font-family:'Outfit',sans-serif;font-size:1.8rem;font-weight:900;color:var(--accent);letter-spacing:-1px}
+  .goal-item{margin-bottom:28px;position:relative;z-index:1}
+  .goal-item:last-child{margin-bottom:0}
+  .goal-item.total-goal{margin-bottom:40px;padding-bottom:36px;border-bottom:1.5px solid var(--border)}
+  .goal-top{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:12px}
+  .goal-name{display:flex;align-items:center;gap:10px}
+  .goal-name .gdot{width:10px;height:10px;border-radius:50%;box-shadow:0 0 10px currentColor}
+  .goal-name .gtext{font-size:0.92rem;font-weight:800;color:var(--text)}
+  .total-goal .goal-name .gtext{font-family:'Outfit',sans-serif;font-size:1.15rem;font-weight:900;letter-spacing:-0.3px}
+  .goal-amounts{display:flex;align-items:baseline;gap:8px}
+  .goal-current{font-family:'Outfit',sans-serif;font-size:1.4rem;font-weight:900;letter-spacing:-0.5px}
+  .total-goal .goal-current{font-size:1.8rem}
+  .goal-separator{color:var(--text-dim);font-size:0.82rem;font-weight:700}
+  .goal-target{font-size:0.88rem;color:var(--text-dim);font-weight:700}
+  .goal-pct{font-family:'Outfit',sans-serif;font-size:1.1rem;font-weight:900;letter-spacing:-0.3px}
+  .total-goal .goal-pct{font-size:1.4rem}
+  .goal-bar-bg{width:100%;height:14px;border-radius:100px;background:var(--surface2);overflow:hidden;position:relative;border:1px solid rgba(26,39,68,0.5)}
+  .total-goal .goal-bar-bg{height:22px}
+  .goal-bar-fill{height:100%;border-radius:100px;position:relative;transition:width 1.5s cubic-bezier(0.25,0.46,0.45,0.94);min-width:2px}
+  .goal-bar-fill::after{content:'';position:absolute;top:2px;left:4px;right:4px;height:40%;border-radius:100px;background:linear-gradient(180deg,rgba(255,255,255,0.25),transparent)}
+  .goal-bar-fill .pulse{position:absolute;right:0;top:50%;transform:translateY(-50%);width:8px;height:8px;border-radius:50%;background:#fff;box-shadow:0 0 12px currentColor,0 0 24px currentColor;animation:goalPulse 2s ease-in-out infinite}
+  .total-goal .goal-bar-fill .pulse{width:12px;height:12px}
+  @keyframes goalPulse{0%,100%{opacity:1;transform:translateY(-50%) scale(1)}50%{opacity:0.5;transform:translateY(-50%) scale(0.6)}}
+  .goal-meta{display:flex;justify-content:space-between;margin-top:8px;font-size:0.74rem;color:var(--text-dim);font-weight:700}
+  .goal-meta .remaining{color:var(--text-mid)}
+  .goal-meta .daily-needed{color:var(--amber)}
+  @media(max-width:768px){.goals-wrap{padding:28px 22px}.goal-current{font-size:1.2rem}.total-goal .goal-current{font-size:1.5rem}.goals-header{flex-direction:column;align-items:flex-start;gap:14px}.goals-header-right{text-align:left}}
+  @media(max-width:480px){.goals-wrap{padding:22px 16px}.goal-name .gtext{font-size:0.82rem}.goal-current{font-size:1rem}.total-goal .goal-current{font-size:1.3rem}.goal-bar-bg{height:10px}.total-goal .goal-bar-bg{height:16px}.goal-pct{font-size:0.9rem}.total-goal .goal-pct{font-size:1.1rem}}
+
   @keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
   .animate{animation:fadeUp 0.55s ease forwards;opacity:0}
   .d1{animation-delay:.05s}.d2{animation-delay:.1s}.d3{animation-delay:.15s}.d4{animation-delay:.2s}.d5{animation-delay:.25s}.d6{animation-delay:.3s}
@@ -198,6 +237,12 @@
   <div class="chart-row"><div class="chart-container animate d4"><h3>Yesterday — Company Profit</h3><canvas id="yesterdayProfitChart" height="170"></canvas></div><div class="chart-container animate d5"><h3>Yesterday — Company ROI</h3><canvas id="yesterdayRoiChart" height="170"></canvas></div></div>
   <div class="table-wrap animate d6"><h3>Yesterday Company Breakdown</h3><table><thead><tr><th>Company</th><th>Spend</th><th>Revenue</th><th>Profit</th><th>ROI %</th></tr></thead><tbody id="yesterdayTable"></tbody></table></div>
 </div>
+
+  <div class="section-title animate d1" style="margin-top:40px"><span class="dot" style="background:linear-gradient(135deg,var(--accent),var(--accent2));color:var(--accent)"></span>April Goals — Profit Tracker<span class="line"></span></div>
+
+  <div class="goals-wrap animate d2" id="goalsSection"></div>
+
+</div>
 <div class="footer">DASHBOARD · APRIL 2026 · ALL FIGURES IN USD</div>
 </div>
 
@@ -255,6 +300,34 @@ const mt=document.getElementById('monthlyTable');monthlyCompanies.forEach(c=>{mt
 mt.innerHTML+='<tr style="border-top:2px solid var(--accent);font-weight:800"><td>Grand Total</td><td>$4,876</td><td>$47,824</td><td style="color:#34d399">$42,948</td><td><span class="roi-badge" style="'+rc(881)+'">880.6%</span></td><td>$322,111</td></tr>';
 const yt=document.getElementById('yesterdayTable');yesterdayCompanies.forEach(c=>{yt.innerHTML+='<tr><td><span class="company-name"><span class="company-dot" style="background:'+c.color+';color:'+c.color+'"></span>'+c.name+'</span></td><td>'+fmt(c.spend)+'</td><td>'+fmt(c.revenue)+'</td><td style="color:'+(c.profit>0?'#34d399':'#6b85a8')+'">'+fmt(c.profit)+'</td><td><span class="roi-badge" style="'+rc(c.roi)+'">'+(c.roi>0?c.roi.toFixed(1)+'%':'inactive')+'</span></td></tr>'});
 yt.innerHTML+='<tr style="border-top:2px solid var(--rose);font-weight:800"><td>Grand Total</td><td>$1,360</td><td>$9,495</td><td style="color:#34d399">$8,134</td><td><span class="roi-badge" style="'+rc(598)+'">597.9%</span></td></tr>';
+
+// ─── GOALS / PROGRESS BARS ───
+const goals=[
+  {name:'Total Portfolio',current:42948,target:360000,color:'linear-gradient(90deg,#2dd4bf,#38bdf8,#a78bfa)',dotColor:'#2dd4bf',isTotal:true},
+  {name:'Spirion',current:16627,target:134000,color:'linear-gradient(90deg,#38bdf8,#7dd3fc)',dotColor:'#38bdf8'},
+  {name:'Innovate',current:9531,target:130000,color:'linear-gradient(90deg,#818cf8,#a78bfa)',dotColor:'#818cf8'},
+  {name:'Spread',current:9319,target:67000,color:'linear-gradient(90deg,#34d399,#6ee7b7)',dotColor:'#34d399'},
+  {name:'Galatea',current:5713,target:27000,color:'linear-gradient(90deg,#fbbf24,#fcd34d)',dotColor:'#fbbf24'},
+  {name:'IMPULSPROM',current:1649,target:2000,color:'linear-gradient(90deg,#fb7185,#fda4af)',dotColor:'#fb7185'}
+];
+const daysInMonth=30,daysPassed=4,daysLeft=daysInMonth-daysPassed;
+const gs=document.getElementById('goalsSection');
+let goalsHTML=`<div class="goals-header"><div class="goals-header-left"><div class="icon-wrap">🎯</div><div><h3>Monthly Profit Goals</h3><div class="goals-sub">April 2026 · Progress Tracker</div></div></div><div class="goals-header-right"><div class="days-label">Days Remaining</div><div class="days-value">${daysLeft} of ${daysInMonth}</div></div></div>`;
+goals.forEach(g=>{
+  const pct=Math.min((g.current/g.target)*100,100);
+  const remaining=Math.max(g.target-g.current,0);
+  const dailyNeeded=daysLeft>0?Math.ceil(remaining/daysLeft):0;
+  const pctColor=pct>=100?'#34d399':pct>=50?'#38bdf8':pct>=25?'#fbbf24':'#fb7185';
+  goalsHTML+=`<div class="goal-item ${g.isTotal?'total-goal':''}">
+    <div class="goal-top">
+      <div class="goal-name"><span class="gdot" style="background:${g.dotColor};color:${g.dotColor}"></span><span class="gtext">${g.name}</span></div>
+      <div class="goal-amounts"><span class="goal-current" style="color:${g.dotColor}">$${g.current.toLocaleString()}</span><span class="goal-separator">/</span><span class="goal-target">$${g.target.toLocaleString()}</span><span class="goal-pct" style="color:${pctColor};margin-left:12px">${pct.toFixed(1)}%</span></div>
+    </div>
+    <div class="goal-bar-bg"><div class="goal-bar-fill" style="width:${pct}%;background:${g.color};color:${g.dotColor}"><span class="pulse"></span></div></div>
+    <div class="goal-meta"><span class="remaining">$${remaining.toLocaleString()} remaining</span><span class="daily-needed">Need ~$${dailyNeeded.toLocaleString()}/day to hit target</span></div>
+  </div>`;
+});
+gs.innerHTML=goalsHTML;
 </script>
 </body>
 </html>
