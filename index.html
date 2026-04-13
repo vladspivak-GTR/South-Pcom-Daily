@@ -203,26 +203,26 @@
 <body>
 <div id="password-gate"><div class="gate-box"><div class="gate-icon">🔒</div><div class="gate-logo">April 2026</div><div class="gate-sub">Performance Dashboard</div><input type="password" id="gate-password" class="gate-input" placeholder="Enter password" autofocus onkeydown="if(event.key==='Enter')checkPassword()"><button class="gate-btn" onclick="checkPassword()">Unlock Dashboard</button><div class="gate-error" id="gate-error"></div></div></div>
 <div id="dashboard-content">
-<div class="header"><div><div class="subtitle">Monthly Performance Report</div><h1>April 2026</h1></div><div class="date-badge">01 – 08 Apr 2026 · Day 8</div></div>
+<div class="header"><div><div class="subtitle">Monthly Performance Report</div><h1>April 2026</h1></div><div class="date-badge">01 – 12 Apr 2026 · Day 12</div></div>
 <div class="main">
   <div class="section-title animate d1"><span class="dot" style="background:var(--accent);color:var(--accent)"></span>Monthly Overview<span class="line"></span></div>
-  <div class="early-notice animate d1"><div class="icon">📊</div><div class="text"><strong>8 days into April.</strong> 6 companies active and profitable. $87K total profit at 813% ROI. Run rate $325K.</div></div>
+  <div class="early-notice animate d1"><div class="icon">📊</div><div class="text"><strong>12 days into April.</strong> 6 companies active and profitable. $134K total profit at 827% ROI. Run rate $334K.</div></div>
   <div class="kpi-row">
-    <div class="kpi-card animate d1"><div class="glow" style="background:var(--accent)"></div><div class="label">Total Spend</div><div class="value" style="color:var(--text)">$10,669</div><div class="sub">8 days tracked</div></div>
-    <div class="kpi-card animate d2"><div class="glow" style="background:var(--accent2)"></div><div class="label">Total Revenue</div><div class="value" style="color:var(--accent2)">$97,403</div><div class="sub">Avg $12,175/day</div></div>
-    <div class="kpi-card animate d3"><div class="glow" style="background:var(--green)"></div><div class="label">Total Profit</div><div class="value" style="color:var(--green)">$86,735</div><div class="sub">Avg $10,842/day</div></div>
-    <div class="kpi-card animate d4"><div class="glow" style="background:var(--purple)"></div><div class="label">Overall ROI</div><div class="value" style="color:var(--purple)">813%</div><div class="sub">Return on investment</div></div>
-    <div class="kpi-card animate d5"><div class="glow" style="background:var(--amber)"></div><div class="label">Profit Margin</div><div class="value" style="color:var(--amber)">89.1%</div><div class="sub">Profit / Revenue ratio</div></div>
+    <div class="kpi-card animate d1"><div class="glow" style="background:var(--accent)"></div><div class="label">Total Spend</div><div class="value" style="color:var(--text)">$16,153</div><div class="sub">12 days tracked</div></div>
+    <div class="kpi-card animate d2"><div class="glow" style="background:var(--accent2)"></div><div class="label">Total Revenue</div><div class="value" style="color:var(--accent2)">$148,745</div><div class="sub">Avg $12,395/day</div></div>
+    <div class="kpi-card animate d3"><div class="glow" style="background:var(--green)"></div><div class="label">Total Profit</div><div class="value" style="color:var(--green)">$133,594</div><div class="sub">Avg $11,133/day</div></div>
+    <div class="kpi-card animate d4"><div class="glow" style="background:var(--purple)"></div><div class="label">Overall ROI</div><div class="value" style="color:var(--purple)">827%</div><div class="sub">Return on investment</div></div>
+    <div class="kpi-card animate d5"><div class="glow" style="background:var(--amber)"></div><div class="label">Profit Margin</div><div class="value" style="color:var(--amber)">89.8%</div><div class="sub">Profit / Revenue ratio</div></div>
   </div>
   <div class="chart-container animate d3"><h3>Daily Profit & ROI Trend</h3><canvas id="dailyChart" height="140"></canvas></div>
   <div class="chart-row"><div class="chart-container animate d4"><h3>Daily Spend</h3><canvas id="spendChart" height="150"></canvas></div><div class="chart-container animate d5"><h3>Daily ROI %</h3><canvas id="roiChart" height="150"></canvas></div></div>
 
   <div class="section-title animate d1" style="margin-top:20px"><span class="dot" style="background:var(--accent2);color:var(--accent2)"></span>Monthly Dashboard — By Company<span class="line"></span></div>
   <div class="kpi-row">
-    <div class="kpi-card animate d1"><div class="glow" style="background:var(--amber)"></div><div class="label">Run Rate (Monthly)</div><div class="value" style="color:var(--amber)">$325,255</div><div class="sub">Projected monthly profit</div></div>
+    <div class="kpi-card animate d1"><div class="glow" style="background:var(--amber)"></div><div class="label">Run Rate (Monthly)</div><div class="value" style="color:var(--amber)">$333,984</div><div class="sub">Projected monthly profit</div></div>
     <div class="kpi-card animate d2"><div class="glow" style="background:var(--green)"></div><div class="label">Companies in Profit</div><div class="value" style="color:var(--green)">6</div><div class="sub">of 6 active companies</div></div>
-    <div class="kpi-card animate d3"><div class="glow" style="background:var(--purple)"></div><div class="label">Monthly ROI</div><div class="value" style="color:var(--purple)">813%</div><div class="sub">Grand total ROI</div></div>
-    <div class="kpi-card animate d4"><div class="glow" style="background:var(--accent)"></div><div class="label">Total Profit (MTD)</div><div class="value" style="color:var(--accent)">$86,735</div><div class="sub">Month to date</div></div>
+    <div class="kpi-card animate d3"><div class="glow" style="background:var(--purple)"></div><div class="label">Monthly ROI</div><div class="value" style="color:var(--purple)">827%</div><div class="sub">Grand total ROI</div></div>
+    <div class="kpi-card animate d4"><div class="glow" style="background:var(--accent)"></div><div class="label">Total Profit (MTD)</div><div class="value" style="color:var(--accent)">$133,594</div><div class="sub">Month to date</div></div>
   </div>
   <div class="chart-row"><div class="chart-container animate d4"><h3>Company Profit Breakdown</h3><canvas id="monthlyProfitChart" height="170"></canvas></div><div class="chart-container animate d5"><h3>Company ROI Comparison</h3><canvas id="monthlyRoiChart" height="170"></canvas></div></div>
   <div class="chart-container animate d5"><h3>Spend vs Profit — Company Efficiency</h3><canvas id="efficiencyChart" height="120"></canvas></div>
@@ -230,8 +230,8 @@
 
   <div class="section-title animate d1" style="margin-top:20px"><span class="dot" style="background:var(--rose);color:var(--rose)"></span>Yesterday's Performance — By Company<span class="line"></span></div>
   <div class="kpi-row">
-    <div class="kpi-card animate d1"><div class="glow" style="background:var(--green)"></div><div class="label">Yesterday Profit</div><div class="value" style="color:var(--green)">$13,246</div><div class="sub">Apr 08, 2026</div></div>
-    <div class="kpi-card animate d2"><div class="glow" style="background:var(--purple)"></div><div class="label">Yesterday ROI</div><div class="value" style="color:var(--purple)">1,059%</div><div class="sub">Return on $1,251 spend</div></div>
+    <div class="kpi-card animate d1"><div class="glow" style="background:var(--green)"></div><div class="label">Yesterday Profit</div><div class="value" style="color:var(--green)">$9,510</div><div class="sub">Apr 12, 2026</div></div>
+    <div class="kpi-card animate d2"><div class="glow" style="background:var(--purple)"></div><div class="label">Yesterday ROI</div><div class="value" style="color:var(--purple)">602%</div><div class="sub">Return on $1,581 spend</div></div>
     <div class="kpi-card animate d3"><div class="glow" style="background:var(--accent)"></div><div class="label">Active Companies</div><div class="value" style="color:var(--accent)">6</div><div class="sub">Generating revenue</div></div>
   </div>
   <div class="chart-row"><div class="chart-container animate d4"><h3>Yesterday — Company Profit</h3><canvas id="yesterdayProfitChart" height="170"></canvas></div><div class="chart-container animate d5"><h3>Yesterday — Company ROI</h3><canvas id="yesterdayRoiChart" height="170"></canvas></div></div>
@@ -252,9 +252,9 @@ function checkPassword(){const i=document.getElementById('gate-password'),e=docu
 if(sessionStorage.getItem('dash_mar_unlocked')==='true'){document.getElementById('password-gate').classList.add('hidden');document.getElementById('dashboard-content').classList.add('visible')}
 </script>
 <script>
-const dailyData=[{date:'Apr 01',spend:1279,revenue:13857,profit:12578,roi:983.34},{date:'Apr 02',spend:1169,revenue:12560,profit:11390,roi:973.97},{date:'Apr 03',spend:1067,revenue:11912,profit:10845,roi:1016},{date:'Apr 04',spend:1360,revenue:9495,profit:8134,roi:598},{date:'Apr 05',spend:1716,revenue:9125,profit:7408,roi:432},{date:'Apr 06',spend:1449,revenue:9562,profit:8113,roi:560},{date:'Apr 07',spend:1376,revenue:16396,profit:15019,roi:1091},{date:'Apr 08',spend:1251,revenue:14497,profit:13246,roi:1059}];
-const monthlyCompanies=[{name:'Spirion',spend:1857,revenue:35208,profit:33351,roi:1794.82,runRate:125065,color:'#38bdf8'},{name:'Innovate',spend:2654,revenue:21564,profit:18910,roi:712.19,runRate:70911,color:'#818cf8'},{name:'Spread',spend:2810,revenue:21198,profit:18388,roi:654.12,runRate:68956,color:'#34d399'},{name:'Galatea',spend:1466,revenue:13647,profit:12181,roi:830.35,runRate:45680,color:'#fbbf24'},{name:'IMPULSPROM',spend:1845,revenue:5333,profit:3488,roi:188.93,runRate:13079,color:'#fb7185'},{name:'omnia',spend:36,revenue:453,profit:417,roi:1125.70,runRate:1564,color:'#f472b6'}];
-const yesterdayCompanies=[{name:'Innovate',spend:287,revenue:3765,profit:3478,roi:1212.96,color:'#818cf8'},{name:'Spirion',spend:233,revenue:4859,profit:4626,roi:1988.36,color:'#38bdf8'},{name:'Spread',spend:356,revenue:3046,profit:2690,roi:755.22,color:'#34d399'},{name:'Galatea',spend:189,revenue:2183,profit:1995,roi:1055.83,color:'#fbbf24'},{name:'IMPULSPROM',spend:179,revenue:526,profit:347,roi:193.16,color:'#fb7185'},{name:'omnia',spend:7,revenue:118,profit:111,roi:1509.67,color:'#f472b6'}];
+const dailyData=[{date:'Apr 01',spend:1279,revenue:13857,profit:12578,roi:983.34},{date:'Apr 02',spend:1169,revenue:12560,profit:11390,roi:973.97},{date:'Apr 03',spend:1067,revenue:11912,profit:10845,roi:1016},{date:'Apr 04',spend:1360,revenue:9495,profit:8134,roi:598},{date:'Apr 05',spend:2294,revenue:9076,profit:7784,roi:339},{date:'Apr 06',spend:1397,revenue:10391,profit:8995,roi:644},{date:'Apr 07',spend:1301,revenue:17366,profit:16065,roi:1235},{date:'Apr 08',spend:1196,revenue:15486,profit:14290,roi:1195},{date:'Apr 09',spend:1111,revenue:13541,profit:12430,roi:1118},{date:'Apr 10',spend:1120,revenue:12032,profit:10912,roi:975},{date:'Apr 11',spend:1279,revenue:11938,profit:10659,roi:833},{date:'Apr 12',spend:1581,revenue:11091,profit:9510,roi:602}];
+const monthlyCompanies=[{name:'Spirion',spend:2797,revenue:53882,profit:51086,roi:1826.11,runRate:127714,color:'#38bdf8'},{name:'Spread',spend:4379,revenue:34370,profit:29991,roi:684.71,runRate:74978,color:'#34d399'},{name:'Innovate',spend:3741,revenue:31636,profit:27895,roi:745.42,runRate:69737,color:'#818cf8'},{name:'Galatea',spend:2185,revenue:20450,profit:18266,roi:835.75,runRate:45664,color:'#fbbf24'},{name:'IMPULSPROM',spend:2999,revenue:7756,profit:5759,roi:191.92,runRate:14396,color:'#fb7185'},{name:'omnia',spend:52,revenue:649,profit:597,roi:1125.92,runRate:1494,color:'#f472b6'}];
+const yesterdayCompanies=[{name:'Innovate',spend:379,revenue:2380,profit:2001,roi:527.35,color:'#818cf8'},{name:'Spirion',spend:284,revenue:4263,profit:3979,roi:1402.92,color:'#38bdf8'},{name:'Spread',spend:438,revenue:2125,profit:1688,roi:385.78,color:'#34d399'},{name:'Galatea',spend:184,revenue:1431,profit:1247,roi:678.23,color:'#fbbf24'},{name:'IMPULSPROM',spend:294,revenue:838,profit:544,roi:185.27,color:'#fb7185'},{name:'omnia',spend:2,revenue:53,profit:51,roi:2166.81,color:'#f472b6'}];
 
 Chart.register(ChartDataLabels);Chart.defaults.color='#6b85a8';Chart.defaults.borderColor='rgba(26,39,68,0.6)';Chart.defaults.font.family="'Plus Jakarta Sans',sans-serif";Chart.defaults.font.weight=600;Chart.defaults.plugins.datalabels={display:false};
 function grad(ctx,c1,c2){const g=ctx.createLinearGradient(0,0,0,400);g.addColorStop(0,c1);g.addColorStop(1,c2);return g}
@@ -297,20 +297,20 @@ new Chart(document.getElementById('yesterdayRoiChart').getContext('2d'),{type:'b
 
 function fmt(n){return'$'+n.toLocaleString()}function rc(r){if(r>=1000)return'background:rgba(52,211,153,0.15);color:#34d399';if(r>=500)return'background:rgba(56,189,248,0.15);color:#38bdf8';if(r>0)return'background:rgba(251,191,36,0.15);color:#fbbf24';return'background:rgba(107,133,168,0.1);color:#6b85a8'}
 const mt=document.getElementById('monthlyTable');monthlyCompanies.forEach(c=>{mt.innerHTML+='<tr><td><span class="company-name"><span class="company-dot" style="background:'+c.color+';color:'+c.color+'"></span>'+c.name+'</span></td><td>'+fmt(c.spend)+'</td><td>'+fmt(c.revenue)+'</td><td style="color:'+(c.profit>0?'#34d399':'#6b85a8')+'">'+fmt(c.profit)+'</td><td><span class="roi-badge" style="'+rc(c.roi)+'">'+c.roi.toFixed(1)+'%</span></td><td>'+(c.runRate>0?fmt(c.runRate):'—')+'</td></tr>'});
-mt.innerHTML+='<tr style="border-top:2px solid var(--accent);font-weight:800"><td>Grand Total</td><td>$10,669</td><td>$97,403</td><td style="color:#34d399">$86,735</td><td><span class="roi-badge" style="'+rc(813)+'">812.9%</span></td><td>$325,255</td></tr>';
+mt.innerHTML+='<tr style="border-top:2px solid var(--accent);font-weight:800"><td>Grand Total</td><td>$16,153</td><td>$148,745</td><td style="color:#34d399">$133,594</td><td><span class="roi-badge" style="'+rc(827)+'">827.0%</span></td><td>$333,984</td></tr>';
 const yt=document.getElementById('yesterdayTable');yesterdayCompanies.forEach(c=>{yt.innerHTML+='<tr><td><span class="company-name"><span class="company-dot" style="background:'+c.color+';color:'+c.color+'"></span>'+c.name+'</span></td><td>'+fmt(c.spend)+'</td><td>'+fmt(c.revenue)+'</td><td style="color:'+(c.profit>0?'#34d399':'#6b85a8')+'">'+fmt(c.profit)+'</td><td><span class="roi-badge" style="'+rc(c.roi)+'">'+(c.roi>0?c.roi.toFixed(1)+'%':'inactive')+'</span></td></tr>'});
-yt.innerHTML+='<tr style="border-top:2px solid var(--rose);font-weight:800"><td>Grand Total</td><td>$1,251</td><td>$14,497</td><td style="color:#34d399">$13,246</td><td><span class="roi-badge" style="'+rc(1059)+'">1058.6%</span></td></tr>';
+yt.innerHTML+='<tr style="border-top:2px solid var(--rose);font-weight:800"><td>Grand Total</td><td>$1,581</td><td>$11,091</td><td style="color:#34d399">$9,510</td><td><span class="roi-badge" style="'+rc(602)+'">601.7%</span></td></tr>';
 
 // ─── GOALS / PROGRESS BARS ───
 const goals=[
-  {name:'Total Portfolio',current:86735,target:360000,color:'linear-gradient(90deg,#2dd4bf,#38bdf8,#a78bfa)',dotColor:'#2dd4bf',isTotal:true},
-  {name:'Spirion',current:33351,target:134000,color:'linear-gradient(90deg,#38bdf8,#7dd3fc)',dotColor:'#38bdf8'},
-  {name:'Innovate',current:18910,target:130000,color:'linear-gradient(90deg,#818cf8,#a78bfa)',dotColor:'#818cf8'},
-  {name:'Spread',current:18388,target:67000,color:'linear-gradient(90deg,#34d399,#6ee7b7)',dotColor:'#34d399'},
-  {name:'Galatea',current:12181,target:27000,color:'linear-gradient(90deg,#fbbf24,#fcd34d)',dotColor:'#fbbf24'},
-  {name:'IMPULSPROM',current:3488,target:2000,color:'linear-gradient(90deg,#fb7185,#fda4af)',dotColor:'#fb7185'}
+  {name:'Total Portfolio',current:133594,target:360000,color:'linear-gradient(90deg,#2dd4bf,#38bdf8,#a78bfa)',dotColor:'#2dd4bf',isTotal:true},
+  {name:'Spirion',current:51086,target:134000,color:'linear-gradient(90deg,#38bdf8,#7dd3fc)',dotColor:'#38bdf8'},
+  {name:'Innovate',current:27895,target:130000,color:'linear-gradient(90deg,#818cf8,#a78bfa)',dotColor:'#818cf8'},
+  {name:'Spread',current:29991,target:67000,color:'linear-gradient(90deg,#34d399,#6ee7b7)',dotColor:'#34d399'},
+  {name:'Galatea',current:18266,target:27000,color:'linear-gradient(90deg,#fbbf24,#fcd34d)',dotColor:'#fbbf24'},
+  {name:'IMPULSPROM',current:5759,target:2000,color:'linear-gradient(90deg,#fb7185,#fda4af)',dotColor:'#fb7185'}
 ];
-const daysInMonth=30,daysPassed=8,daysLeft=daysInMonth-daysPassed;
+const daysInMonth=30,daysPassed=12,daysLeft=daysInMonth-daysPassed;
 const gs=document.getElementById('goalsSection');
 let goalsHTML=`<div class="goals-header"><div class="goals-header-left"><div class="icon-wrap">🎯</div><div><h3>Monthly Profit Goals</h3><div class="goals-sub">April 2026 · Progress Tracker</div></div></div><div class="goals-header-right"><div class="days-label">Days Remaining</div><div class="days-value">${daysLeft} of ${daysInMonth}</div></div></div>`;
 goals.forEach(g=>{
