@@ -1,0 +1,8 @@
+{
+  "crons": [
+    {
+      "path": "/api/voluum-sync",
+      "schedule": "0 5 * * *"
+    }
+  ]
+}
