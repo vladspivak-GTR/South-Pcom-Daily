@@ -2,19 +2,28 @@ export default async function handler(req, res) {
   res.setHeader('Content-Type', 'application/json');
 
   try {
+    const accessId = (process.env.VOLUUM_ACCESS_ID || '').trim();
+    const accessKey = (process.env.VOLUUM_ACCESS_KEY || '').trim();
+
+    if (!accessId || !accessKey) {
+      return res.status(500).json({ error: 'Missing env vars', hasId: !!accessId, hasKey: !!accessKey });
+    }
+
     // Step 1 — Authenticate with Voluum
     const authRes = await fetch('https://api.voluum.com/auth/access/session', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        accessId: process.env.VOLUUM_ACCESS_ID,
-        accessKey: process.env.VOLUUM_ACCESS_KEY,
-      }),
+      body: JSON.stringify({ accessId, accessKey }),
     });
 
     if (!authRes.ok) {
       const errText = await authRes.text();
-      return res.status(401).json({ error: 'Auth failed', status: authRes.status, detail: errText });
+      return res.status(401).json({
+        error: 'Auth failed',
+        status: authRes.status,
+        detail: errText,
+        debug: { idLen: accessId.length, keyLen: accessKey.length, idStart: accessId.substring(0, 8) },
+      });
     }
 
     const auth = await authRes.json();
