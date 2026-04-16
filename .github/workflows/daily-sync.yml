@@ -2,7 +2,7 @@ name: Daily Dashboard Sync
 
 on:
   schedule:
-    - cron: '0 4 * * *'  # 04:00 UTC = 07:00 Israel time
+    - cron: '30 6 * * *'  # 06:30 UTC = 09:30 Israel time
   workflow_dispatch: # Allow manual trigger for testing
 
 jobs:
